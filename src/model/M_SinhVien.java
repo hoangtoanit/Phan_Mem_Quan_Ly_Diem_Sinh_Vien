@@ -9,6 +9,7 @@ package model;
  *
  * @author HoangVanToan
  */
+import entity.SinhVien;
 public class M_SinhVien {
     
 }

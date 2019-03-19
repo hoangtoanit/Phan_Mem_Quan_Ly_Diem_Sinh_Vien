@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package object;
+package entity;
 
 /**
  *
  * @author HoangVanToan
  */
-public class PhieuDiem {
+public class MonHoc {
     
 }

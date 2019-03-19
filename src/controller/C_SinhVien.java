@@ -9,8 +9,7 @@ package controller;
  *
  * @author HoangVanToan
  */
-import object.LopHoc;
-import object.SinhVien;
+
 public class C_SinhVien {
     
 }
