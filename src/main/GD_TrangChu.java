@@ -10,6 +10,8 @@ package main;
  * @author HoangVanToan
  */
 // import thư viện và các form cần sử dụng
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import view.V_DangNhap;
 import view.V_ThayDoiMatKhau;
 import view.V_ThemDiem;
@@ -32,7 +34,9 @@ import view.V_TimKiemSinhVien;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-public class GD_TrangChu extends javax.swing.JFrame {
+import javax.swing.JOptionPane;
+
+public class GD_TrangChu extends javax.swing.JFrame implements ActionListener {
 
     /**
      * Creates new form frm_main
@@ -41,6 +45,9 @@ public class GD_TrangChu extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         setTitle("Phần Mềm Quản Lý Điểm Sinh Viên");
+        Item_ThemSinhVien.addActionListener(this);
+        Item_SuaTTSinhVien.addActionListener(this);
+        Item_XoaSinhVien.addActionListener(this);
     }
 
     /**
@@ -58,26 +65,26 @@ public class GD_TrangChu extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu6 = new javax.swing.JMenu();
         jMenu9 = new javax.swing.JMenu();
-        mn_addTK = new javax.swing.JMenuItem();
-        mn_editTK = new javax.swing.JMenuItem();
-        mn_deleteTK = new javax.swing.JMenuItem();
+        Item_ThemTaiKhoan = new javax.swing.JMenuItem();
+        Item_SuaTTTaiKhoan = new javax.swing.JMenuItem();
+        Item_XoaTaiKhoan = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
-        menu_addSV = new javax.swing.JMenuItem();
-        menu_editSV = new javax.swing.JMenuItem();
-        mn_deleteSV = new javax.swing.JMenuItem();
+        Item_ThemSinhVien = new javax.swing.JMenuItem();
+        Item_SuaTTSinhVien = new javax.swing.JMenuItem();
+        Item_XoaSinhVien = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
-        mn_addMH = new javax.swing.JMenuItem();
-        mn_editMH = new javax.swing.JMenuItem();
-        mn_deleteMH = new javax.swing.JMenuItem();
+        Item_ThemMonHoc = new javax.swing.JMenuItem();
+        Item_SuaTTMonHoc = new javax.swing.JMenuItem();
+        Item_XoaMonHoc = new javax.swing.JMenuItem();
         jMenu7 = new javax.swing.JMenu();
-        mn_addD = new javax.swing.JMenuItem();
-        mn_editD = new javax.swing.JMenuItem();
-        mn_deleteD = new javax.swing.JMenuItem();
+        Item_ThemDiem = new javax.swing.JMenuItem();
+        Item_SuaTTDiem = new javax.swing.JMenuItem();
+        Item_XoaDiem = new javax.swing.JMenuItem();
         jMenu8 = new javax.swing.JMenu();
-        mn_addL = new javax.swing.JMenuItem();
-        mn_editL = new javax.swing.JMenuItem();
-        mn_deleteL = new javax.swing.JMenuItem();
+        Item_ThemLopHoc = new javax.swing.JMenuItem();
+        Item_SuaTTLopHoc = new javax.swing.JMenuItem();
+        Item_XoaLopHoc = new javax.swing.JMenuItem();
         jMenu10 = new javax.swing.JMenu();
         menu_TKSV = new javax.swing.JMenuItem();
         menu_TKMH = new javax.swing.JMenuItem();
@@ -104,32 +111,32 @@ public class GD_TrangChu extends javax.swing.JFrame {
         jMenu9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Người Dùng.png"))); // NOI18N
         jMenu9.setText("Quản Lý Tài Khoản");
 
-        mn_addTK.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Thêm.png"))); // NOI18N
-        mn_addTK.setText("Thêm Tài Khoản");
-        mn_addTK.addActionListener(new java.awt.event.ActionListener() {
+        Item_ThemTaiKhoan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Thêm.png"))); // NOI18N
+        Item_ThemTaiKhoan.setText("Thêm Tài Khoản");
+        Item_ThemTaiKhoan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mn_addTKActionPerformed(evt);
+                Item_ThemTaiKhoanActionPerformed(evt);
             }
         });
-        jMenu9.add(mn_addTK);
+        jMenu9.add(Item_ThemTaiKhoan);
 
-        mn_editTK.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Sửa.png"))); // NOI18N
-        mn_editTK.setText("Sửa Thông Tin Tài Khoản");
-        mn_editTK.addActionListener(new java.awt.event.ActionListener() {
+        Item_SuaTTTaiKhoan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Sửa.png"))); // NOI18N
+        Item_SuaTTTaiKhoan.setText("Sửa Thông Tin Tài Khoản");
+        Item_SuaTTTaiKhoan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mn_editTKActionPerformed(evt);
+                Item_SuaTTTaiKhoanActionPerformed(evt);
             }
         });
-        jMenu9.add(mn_editTK);
+        jMenu9.add(Item_SuaTTTaiKhoan);
 
-        mn_deleteTK.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Xóa.png"))); // NOI18N
-        mn_deleteTK.setText("Xóa Tài Khoản");
-        mn_deleteTK.addActionListener(new java.awt.event.ActionListener() {
+        Item_XoaTaiKhoan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Xóa.png"))); // NOI18N
+        Item_XoaTaiKhoan.setText("Xóa Tài Khoản");
+        Item_XoaTaiKhoan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mn_deleteTKActionPerformed(evt);
+                Item_XoaTaiKhoanActionPerformed(evt);
             }
         });
-        jMenu9.add(mn_deleteTK);
+        jMenu9.add(Item_XoaTaiKhoan);
 
         jMenu6.add(jMenu9);
 
@@ -142,32 +149,32 @@ public class GD_TrangChu extends javax.swing.JFrame {
         jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Sinh Viên.png"))); // NOI18N
         jMenu4.setText("Sinh Viên ");
 
-        menu_addSV.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Thêm.png"))); // NOI18N
-        menu_addSV.setText("Thêm Sinh Viên");
-        menu_addSV.addActionListener(new java.awt.event.ActionListener() {
+        Item_ThemSinhVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Thêm.png"))); // NOI18N
+        Item_ThemSinhVien.setText("Thêm Sinh Viên");
+        Item_ThemSinhVien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menu_addSVActionPerformed(evt);
+                Item_ThemSinhVienActionPerformed(evt);
             }
         });
-        jMenu4.add(menu_addSV);
+        jMenu4.add(Item_ThemSinhVien);
 
-        menu_editSV.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Sửa.png"))); // NOI18N
-        menu_editSV.setText("Sửa Thông Tin Sinh Viên");
-        menu_editSV.addActionListener(new java.awt.event.ActionListener() {
+        Item_SuaTTSinhVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Sửa.png"))); // NOI18N
+        Item_SuaTTSinhVien.setText("Sửa Thông Tin Sinh Viên");
+        Item_SuaTTSinhVien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menu_editSVActionPerformed(evt);
+                Item_SuaTTSinhVienActionPerformed(evt);
             }
         });
-        jMenu4.add(menu_editSV);
+        jMenu4.add(Item_SuaTTSinhVien);
 
-        mn_deleteSV.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Xóa.png"))); // NOI18N
-        mn_deleteSV.setText("Xóa Sinh Viên");
-        mn_deleteSV.addActionListener(new java.awt.event.ActionListener() {
+        Item_XoaSinhVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Xóa.png"))); // NOI18N
+        Item_XoaSinhVien.setText("Xóa Sinh Viên");
+        Item_XoaSinhVien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mn_deleteSVActionPerformed(evt);
+                Item_XoaSinhVienActionPerformed(evt);
             }
         });
-        jMenu4.add(mn_deleteSV);
+        jMenu4.add(Item_XoaSinhVien);
 
         jMenu1.add(jMenu4);
 
@@ -175,32 +182,32 @@ public class GD_TrangChu extends javax.swing.JFrame {
         jMenu5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Môn Học.png"))); // NOI18N
         jMenu5.setText("Môn Học");
 
-        mn_addMH.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Thêm.png"))); // NOI18N
-        mn_addMH.setText("Thêm Môn Học");
-        mn_addMH.addActionListener(new java.awt.event.ActionListener() {
+        Item_ThemMonHoc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Thêm.png"))); // NOI18N
+        Item_ThemMonHoc.setText("Thêm Môn Học");
+        Item_ThemMonHoc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mn_addMHActionPerformed(evt);
+                Item_ThemMonHocActionPerformed(evt);
             }
         });
-        jMenu5.add(mn_addMH);
+        jMenu5.add(Item_ThemMonHoc);
 
-        mn_editMH.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Sửa.png"))); // NOI18N
-        mn_editMH.setText("Sửa Thông Tin Môn Học");
-        mn_editMH.addActionListener(new java.awt.event.ActionListener() {
+        Item_SuaTTMonHoc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Sửa.png"))); // NOI18N
+        Item_SuaTTMonHoc.setText("Sửa Thông Tin Môn Học");
+        Item_SuaTTMonHoc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mn_editMHActionPerformed(evt);
+                Item_SuaTTMonHocActionPerformed(evt);
             }
         });
-        jMenu5.add(mn_editMH);
+        jMenu5.add(Item_SuaTTMonHoc);
 
-        mn_deleteMH.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Xóa.png"))); // NOI18N
-        mn_deleteMH.setText("Xóa Môn Học");
-        mn_deleteMH.addActionListener(new java.awt.event.ActionListener() {
+        Item_XoaMonHoc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Xóa.png"))); // NOI18N
+        Item_XoaMonHoc.setText("Xóa Môn Học");
+        Item_XoaMonHoc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mn_deleteMHActionPerformed(evt);
+                Item_XoaMonHocActionPerformed(evt);
             }
         });
-        jMenu5.add(mn_deleteMH);
+        jMenu5.add(Item_XoaMonHoc);
 
         jMenu1.add(jMenu5);
 
@@ -208,65 +215,65 @@ public class GD_TrangChu extends javax.swing.JFrame {
         jMenu7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Điểm.png"))); // NOI18N
         jMenu7.setText("Điểm");
 
-        mn_addD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Thêm.png"))); // NOI18N
-        mn_addD.setText("Thêm Điểm");
-        mn_addD.addActionListener(new java.awt.event.ActionListener() {
+        Item_ThemDiem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Thêm.png"))); // NOI18N
+        Item_ThemDiem.setText("Thêm Điểm");
+        Item_ThemDiem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mn_addDActionPerformed(evt);
+                Item_ThemDiemActionPerformed(evt);
             }
         });
-        jMenu7.add(mn_addD);
+        jMenu7.add(Item_ThemDiem);
 
-        mn_editD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Sửa.png"))); // NOI18N
-        mn_editD.setText("Sửa Thông Tin Điểm");
-        mn_editD.addActionListener(new java.awt.event.ActionListener() {
+        Item_SuaTTDiem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Sửa.png"))); // NOI18N
+        Item_SuaTTDiem.setText("Sửa Thông Tin Điểm");
+        Item_SuaTTDiem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mn_editDActionPerformed(evt);
+                Item_SuaTTDiemActionPerformed(evt);
             }
         });
-        jMenu7.add(mn_editD);
+        jMenu7.add(Item_SuaTTDiem);
 
-        mn_deleteD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Xóa.png"))); // NOI18N
-        mn_deleteD.setText("Xóa Điểm");
-        mn_deleteD.addActionListener(new java.awt.event.ActionListener() {
+        Item_XoaDiem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Xóa.png"))); // NOI18N
+        Item_XoaDiem.setText("Xóa Điểm");
+        Item_XoaDiem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mn_deleteDActionPerformed(evt);
+                Item_XoaDiemActionPerformed(evt);
             }
         });
-        jMenu7.add(mn_deleteD);
+        jMenu7.add(Item_XoaDiem);
 
         jMenu1.add(jMenu7);
 
         jMenu8.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jMenu8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Lớp.png"))); // NOI18N
-        jMenu8.setText("Lớp");
+        jMenu8.setText("Lớp Học");
 
-        mn_addL.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Thêm.png"))); // NOI18N
-        mn_addL.setText("Thêm Lớp");
-        mn_addL.addActionListener(new java.awt.event.ActionListener() {
+        Item_ThemLopHoc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Thêm.png"))); // NOI18N
+        Item_ThemLopHoc.setText("Thêm Lớp Học");
+        Item_ThemLopHoc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mn_addLActionPerformed(evt);
+                Item_ThemLopHocActionPerformed(evt);
             }
         });
-        jMenu8.add(mn_addL);
+        jMenu8.add(Item_ThemLopHoc);
 
-        mn_editL.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Sửa.png"))); // NOI18N
-        mn_editL.setText("Sửa Thông Tin Lớp");
-        mn_editL.addActionListener(new java.awt.event.ActionListener() {
+        Item_SuaTTLopHoc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Sửa.png"))); // NOI18N
+        Item_SuaTTLopHoc.setText("Sửa Thông Tin Lớp Học");
+        Item_SuaTTLopHoc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mn_editLActionPerformed(evt);
+                Item_SuaTTLopHocActionPerformed(evt);
             }
         });
-        jMenu8.add(mn_editL);
+        jMenu8.add(Item_SuaTTLopHoc);
 
-        mn_deleteL.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Xóa.png"))); // NOI18N
-        mn_deleteL.setText("Xóa Lớp");
-        mn_deleteL.addActionListener(new java.awt.event.ActionListener() {
+        Item_XoaLopHoc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Xóa.png"))); // NOI18N
+        Item_XoaLopHoc.setText("Xóa Lớp Học");
+        Item_XoaLopHoc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mn_deleteLActionPerformed(evt);
+                Item_XoaLopHocActionPerformed(evt);
             }
         });
-        jMenu8.add(mn_deleteL);
+        jMenu8.add(Item_XoaLopHoc);
 
         jMenu1.add(jMenu8);
 
@@ -340,10 +347,11 @@ public class GD_TrangChu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     // hiển thị form Thêm Sinh Viên
-    private void menu_addSVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_addSVActionPerformed
+    private void Item_ThemSinhVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Item_ThemSinhVienActionPerformed
+      
         // khai báo biến
         V_ThemSinhVien addSinhVien;
-        
+
         try {
             addSinhVien = new V_ThemSinhVien();
             addSinhVien.setVisible(true); // hiển thị form thêm sinh viên
@@ -351,35 +359,38 @@ public class GD_TrangChu extends javax.swing.JFrame {
         } catch (Exception ex) {
             Logger.getLogger(V_ThemSinhVien.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_menu_addSVActionPerformed
+        
+          JOptionPane.showMessageDialog(null,"Mời Bạn Thêm Thông Tin Sinh Viên Vào Hệ Thống","Thông Báo",JOptionPane.WARNING_MESSAGE);
+    }//GEN-LAST:event_Item_ThemSinhVienActionPerformed
     // hiển thị form Sửa thông tin sinh viên
-    private void menu_editSVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_editSVActionPerformed
+    private void Item_SuaTTSinhVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Item_SuaTTSinhVienActionPerformed
         // khai báo biến
         V_SuaSinhVien editSinhVien;
         try {
             editSinhVien = new V_SuaSinhVien();
             editSinhVien.setVisible(true); // hiển thị form sửa thông tin sinh viên
             this.dispose(); // ẩn form main
-            
+
         } catch (Exception ex) {
             Logger.getLogger(V_ThemSinhVien.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_menu_editSVActionPerformed
-    
+        JOptionPane.showMessageDialog(null,"Lựa Chọn Sinh Viên Và Sửa Thông Tin Cần Thay Đổi", "Thông Báo",JOptionPane.WARNING_MESSAGE);
+    }//GEN-LAST:event_Item_SuaTTSinhVienActionPerformed
+
     // hiển thị form Xóa sinh viên
-    private void mn_deleteSVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mn_deleteSVActionPerformed
-       // khai báo biến
-       V_XoaSinhVien deleteSinhVien;
+    private void Item_XoaSinhVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Item_XoaSinhVienActionPerformed
+        // khai báo biến
+        V_XoaSinhVien deleteSinhVien;
         try {
             deleteSinhVien = new V_XoaSinhVien();
             deleteSinhVien.setVisible(true); // hiển thị form xóa sinh viên
             this.dispose(); // ẩn form main
         } catch (Exception ex) {
-             Logger.getLogger(V_ThemSinhVien.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(V_ThemSinhVien.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_mn_deleteSVActionPerformed
+    }//GEN-LAST:event_Item_XoaSinhVienActionPerformed
 
-    private void mn_addMHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mn_addMHActionPerformed
+    private void Item_ThemMonHocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Item_ThemMonHocActionPerformed
         // TODO add your handling code here:
         V_ThemMonHoc frm_addMonHoc;
         try {
@@ -387,11 +398,11 @@ public class GD_TrangChu extends javax.swing.JFrame {
             frm_addMonHoc.setVisible(true); // hiển thị form xóa sinh viên
             this.dispose(); // ẩn form main
         } catch (Exception ex) {
-             Logger.getLogger(V_ThemMonHoc.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(V_ThemMonHoc.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_mn_addMHActionPerformed
+    }//GEN-LAST:event_Item_ThemMonHocActionPerformed
 
-    private void mn_addDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mn_addDActionPerformed
+    private void Item_ThemDiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Item_ThemDiemActionPerformed
         // TODO add your handling code here:
         V_ThemDiem frm_addDiem;
         try {
@@ -399,11 +410,11 @@ public class GD_TrangChu extends javax.swing.JFrame {
             frm_addDiem.setVisible(true); // hiển thị form xóa sinh viên
             this.dispose(); // ẩn form main
         } catch (Exception ex) {
-             Logger.getLogger(V_ThemDiem.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(V_ThemDiem.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_mn_addDActionPerformed
+    }//GEN-LAST:event_Item_ThemDiemActionPerformed
 
-    private void mn_deleteTKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mn_deleteTKActionPerformed
+    private void Item_XoaTaiKhoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Item_XoaTaiKhoanActionPerformed
         // TODO add your handling code here:
         V_XoaTaiKhoan deleteTaiKhoan;
         try {
@@ -411,11 +422,11 @@ public class GD_TrangChu extends javax.swing.JFrame {
             deleteTaiKhoan.setVisible(true); // hiển thị form xóa sinh viên
             this.dispose(); // ẩn form main
         } catch (Exception ex) {
-             Logger.getLogger(V_XoaTaiKhoan.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(V_XoaTaiKhoan.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_mn_deleteTKActionPerformed
+    }//GEN-LAST:event_Item_XoaTaiKhoanActionPerformed
 
-    private void mn_addTKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mn_addTKActionPerformed
+    private void Item_ThemTaiKhoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Item_ThemTaiKhoanActionPerformed
         // TODO add your handling code here:
         V_ThemTaiKhoan frm_addTaiKhoan;
         try {
@@ -423,9 +434,9 @@ public class GD_TrangChu extends javax.swing.JFrame {
             frm_addTaiKhoan.setVisible(true); // hiển thị form xóa sinh viên
             this.dispose(); // ẩn form main
         } catch (Exception ex) {
-             Logger.getLogger(V_ThemTaiKhoan.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(V_ThemTaiKhoan.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_mn_addTKActionPerformed
+    }//GEN-LAST:event_Item_ThemTaiKhoanActionPerformed
 
     private void cmd_thoatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmd_thoatMouseClicked
         V_DangNhap frm_login;
@@ -447,13 +458,13 @@ public class GD_TrangChu extends javax.swing.JFrame {
         frmsv = new V_ThayDoiMatKhau();
         frmsv.setVisible(true);
         this.dispose();
-        
+
     }//GEN-LAST:event_menu_thayDoiMKMouseClicked
 
     private void menu_TKSVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_TKSVActionPerformed
         // TODO add your handling code here:
         V_TimKiemSinhVien searchSinhVien;
-        
+
         try {
             searchSinhVien = new V_TimKiemSinhVien();
             searchSinhVien.setVisible(true); // hiển thị form thêm sinh viên
@@ -466,7 +477,7 @@ public class GD_TrangChu extends javax.swing.JFrame {
     private void menu_TKMHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_TKMHActionPerformed
         // TODO add your handling code here:
         V_TimKiemMonHoc searchMonHoc;
-        
+
         try {
             searchMonHoc = new V_TimKiemMonHoc();
             searchMonHoc.setVisible(true); // hiển thị form thêm sinh viên
@@ -476,7 +487,7 @@ public class GD_TrangChu extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_menu_TKMHActionPerformed
 
-    private void mn_editLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mn_editLActionPerformed
+    private void Item_SuaTTLopHocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Item_SuaTTLopHocActionPerformed
         // TODO add your handling code here:
         V_SuaLop frm_editLop;
         try {
@@ -484,11 +495,11 @@ public class GD_TrangChu extends javax.swing.JFrame {
             frm_editLop.setVisible(true); // hiển thị form xóa sinh viên
             this.dispose(); // ẩn form main
         } catch (Exception ex) {
-             Logger.getLogger(V_SuaLop.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(V_SuaLop.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_mn_editLActionPerformed
+    }//GEN-LAST:event_Item_SuaTTLopHocActionPerformed
 
-    private void mn_editMHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mn_editMHActionPerformed
+    private void Item_SuaTTMonHocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Item_SuaTTMonHocActionPerformed
         // TODO add your handling code here:
         V_SuaMonHoc frm_editMonHoc;
         try {
@@ -496,11 +507,11 @@ public class GD_TrangChu extends javax.swing.JFrame {
             frm_editMonHoc.setVisible(true); // hiển thị form xóa sinh viên
             this.dispose(); // ẩn form main
         } catch (Exception ex) {
-             Logger.getLogger(V_SuaMonHoc.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(V_SuaMonHoc.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_mn_editMHActionPerformed
+    }//GEN-LAST:event_Item_SuaTTMonHocActionPerformed
 
-    private void mn_deleteMHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mn_deleteMHActionPerformed
+    private void Item_XoaMonHocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Item_XoaMonHocActionPerformed
         // TODO add your handling code here:
         V_XoaMonHoc frm_deleteMonHoc;
         try {
@@ -508,11 +519,11 @@ public class GD_TrangChu extends javax.swing.JFrame {
             frm_deleteMonHoc.setVisible(true); // hiển thị form xóa sinh viên
             this.dispose(); // ẩn form main
         } catch (Exception ex) {
-             Logger.getLogger(V_XoaMonHoc.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(V_XoaMonHoc.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_mn_deleteMHActionPerformed
+    }//GEN-LAST:event_Item_XoaMonHocActionPerformed
 
-    private void mn_editDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mn_editDActionPerformed
+    private void Item_SuaTTDiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Item_SuaTTDiemActionPerformed
         // TODO add your handling code here:
         V_SuaDiem frm_editDiem;
         try {
@@ -520,11 +531,11 @@ public class GD_TrangChu extends javax.swing.JFrame {
             frm_editDiem.setVisible(true); // hiển thị form xóa sinh viên
             this.dispose(); // ẩn form main
         } catch (Exception ex) {
-             Logger.getLogger(V_SuaDiem.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(V_SuaDiem.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_mn_editDActionPerformed
+    }//GEN-LAST:event_Item_SuaTTDiemActionPerformed
 
-    private void mn_deleteDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mn_deleteDActionPerformed
+    private void Item_XoaDiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Item_XoaDiemActionPerformed
         // TODO add your handling code here:
         V_XoaDiem frm_deleteDiem;
         try {
@@ -532,11 +543,11 @@ public class GD_TrangChu extends javax.swing.JFrame {
             frm_deleteDiem.setVisible(true); // hiển thị form xóa sinh viên
             this.dispose(); // ẩn form main
         } catch (Exception ex) {
-             Logger.getLogger(V_XoaDiem.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(V_XoaDiem.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_mn_deleteDActionPerformed
+    }//GEN-LAST:event_Item_XoaDiemActionPerformed
 
-    private void mn_addLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mn_addLActionPerformed
+    private void Item_ThemLopHocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Item_ThemLopHocActionPerformed
         // TODO add your handling code here:
         V_ThemLop frm_addLop;
         try {
@@ -544,11 +555,11 @@ public class GD_TrangChu extends javax.swing.JFrame {
             frm_addLop.setVisible(true); // hiển thị form xóa sinh viên
             this.dispose(); // ẩn form main
         } catch (Exception ex) {
-             Logger.getLogger(V_ThemLop.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(V_ThemLop.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_mn_addLActionPerformed
+    }//GEN-LAST:event_Item_ThemLopHocActionPerformed
 
-    private void mn_deleteLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mn_deleteLActionPerformed
+    private void Item_XoaLopHocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Item_XoaLopHocActionPerformed
         // TODO add your handling code here:
         V_XoaLop frm_deleteLop;
         try {
@@ -556,11 +567,11 @@ public class GD_TrangChu extends javax.swing.JFrame {
             frm_deleteLop.setVisible(true); // hiển thị form xóa sinh viên
             this.dispose(); // ẩn form main
         } catch (Exception ex) {
-             Logger.getLogger(V_XoaLop.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(V_XoaLop.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_mn_deleteLActionPerformed
+    }//GEN-LAST:event_Item_XoaLopHocActionPerformed
 
-    private void mn_editTKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mn_editTKActionPerformed
+    private void Item_SuaTTTaiKhoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Item_SuaTTTaiKhoanActionPerformed
         // TODO add your handling code here:
         V_SuaTaiKhoan frm_editTaiKhoan;
         try {
@@ -568,9 +579,9 @@ public class GD_TrangChu extends javax.swing.JFrame {
             frm_editTaiKhoan.setVisible(true); // hiển thị form xóa sinh viên
             this.dispose(); // ẩn form main
         } catch (Exception ex) {
-             Logger.getLogger(V_SuaTaiKhoan.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(V_SuaTaiKhoan.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_mn_editTKActionPerformed
+    }//GEN-LAST:event_Item_SuaTTTaiKhoanActionPerformed
 
     /**
      * @param args the command line arguments
@@ -615,6 +626,21 @@ public class GD_TrangChu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem Item_SuaTTDiem;
+    private javax.swing.JMenuItem Item_SuaTTLopHoc;
+    private javax.swing.JMenuItem Item_SuaTTMonHoc;
+    private javax.swing.JMenuItem Item_SuaTTSinhVien;
+    private javax.swing.JMenuItem Item_SuaTTTaiKhoan;
+    private javax.swing.JMenuItem Item_ThemDiem;
+    private javax.swing.JMenuItem Item_ThemLopHoc;
+    private javax.swing.JMenuItem Item_ThemMonHoc;
+    private javax.swing.JMenuItem Item_ThemSinhVien;
+    private javax.swing.JMenuItem Item_ThemTaiKhoan;
+    private javax.swing.JMenuItem Item_XoaDiem;
+    private javax.swing.JMenuItem Item_XoaLopHoc;
+    private javax.swing.JMenuItem Item_XoaMonHoc;
+    private javax.swing.JMenuItem Item_XoaSinhVien;
+    private javax.swing.JMenuItem Item_XoaTaiKhoan;
     private javax.swing.JMenu cmd_thoat;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
@@ -630,22 +656,13 @@ public class GD_TrangChu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem18;
     private javax.swing.JMenuItem menu_TKMH;
     private javax.swing.JMenuItem menu_TKSV;
-    private javax.swing.JMenuItem menu_addSV;
     private javax.swing.JMenu menu_banquyen;
-    private javax.swing.JMenuItem menu_editSV;
     private javax.swing.JMenu menu_thayDoiMK;
-    private javax.swing.JMenuItem mn_addD;
-    private javax.swing.JMenuItem mn_addL;
-    private javax.swing.JMenuItem mn_addMH;
-    private javax.swing.JMenuItem mn_addTK;
-    private javax.swing.JMenuItem mn_deleteD;
-    private javax.swing.JMenuItem mn_deleteL;
-    private javax.swing.JMenuItem mn_deleteMH;
-    private javax.swing.JMenuItem mn_deleteSV;
-    private javax.swing.JMenuItem mn_deleteTK;
-    private javax.swing.JMenuItem mn_editD;
-    private javax.swing.JMenuItem mn_editL;
-    private javax.swing.JMenuItem mn_editMH;
-    private javax.swing.JMenuItem mn_editTK;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void actionPerformed(ActionEvent ae) {
+
+    }
+
 }

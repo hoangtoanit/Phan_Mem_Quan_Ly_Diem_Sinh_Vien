@@ -9,6 +9,6 @@ package entity;
  *
  * @author HoangVanToan
  */
-public class PhieuDiem {
-    
+public class PhieuDiem extends SinhVien{
+      
 }

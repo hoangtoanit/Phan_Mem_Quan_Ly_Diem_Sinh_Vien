@@ -10,16 +10,36 @@ package view;
  * @author HoangVanToan
  */
 // import các thư viện và form hiển thị 
+import DB_Connect.ConnectionDB;
+import DB_Connect.Test_ConnectionDB;
+import controller.C_SinhVien;
+import entity.SinhVien;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import main.GD_TrangChu;
-public class V_SuaSinhVien extends javax.swing.JFrame {
+import javax.swing.table.DefaultTableModel;
+import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.Vector;
+
+public class V_SuaSinhVien extends javax.swing.JFrame implements ActionListener{
 
     /**
      * Creates new form frm_editSinhVien
      */
-    public V_SuaSinhVien() {
+    public V_SuaSinhVien() throws SQLException{
         initComponents();
         setLocationRelativeTo(null);
         setTitle("Sửa Thông Tin Sinh Viên");
+        // khai báo ThemSinhVien để sử dụng V_ThemSinhVien
+       Load_Data();
+        //load dữ liệu ra table
+        
     }
 
     /**
@@ -58,11 +78,12 @@ public class V_SuaSinhVien extends javax.swing.JFrame {
         jTextField5 = new javax.swing.JTextField();
         jTextField6 = new javax.swing.JTextField();
         jTextField7 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btn_CapNhatTTSinhVien = new javax.swing.JButton();
         btThoat = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         jPanel5 = new javax.swing.JPanel();
+        jLabel13 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        Table_Data = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -97,7 +118,7 @@ public class V_SuaSinhVien extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(44, 44, 44)
                         .addComponent(jLabel1)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -109,7 +130,9 @@ public class V_SuaSinhVien extends javax.swing.JFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         jPanel3.setBackground(new java.awt.Color(0, 153, 153));
@@ -171,13 +194,13 @@ public class V_SuaSinhVien extends javax.swing.JFrame {
 
         jTextField7.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
 
-        jButton1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 0, 51));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Sửa.png"))); // NOI18N
-        jButton1.setText("Cập Nhật Thông Tin");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btn_CapNhatTTSinhVien.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        btn_CapNhatTTSinhVien.setForeground(new java.awt.Color(255, 0, 51));
+        btn_CapNhatTTSinhVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Sửa.png"))); // NOI18N
+        btn_CapNhatTTSinhVien.setText("Cập Nhật Thông Tin");
+        btn_CapNhatTTSinhVien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btn_CapNhatTTSinhVienActionPerformed(evt);
             }
         });
 
@@ -211,7 +234,7 @@ public class V_SuaSinhVien extends javax.swing.JFrame {
                                 .addComponent(jRadioButton1)
                                 .addGap(18, 18, 18)
                                 .addComponent(jRadioButton2))
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btn_CapNhatTTSinhVien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jTextField2)
                             .addComponent(jTextField3)
                             .addComponent(jTextField4)
@@ -277,40 +300,54 @@ public class V_SuaSinhVien extends javax.swing.JFrame {
                     .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(btn_CapNhatTTSinhVien)
                     .addComponent(btThoat))
                 .addContainerGap(37, Short.MAX_VALUE))
         );
 
         jPanel4Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jTextField1, jTextField2, jTextField3, jTextField4, jTextField5, jTextField6, jTextField7});
 
-        jTable1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel13.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(0, 0, 204));
+        jLabel13.setText("BẢNG DANH SÁCH SINH VIÊN");
+
+        Table_Data.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        Table_Data.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "STT", "Mã Sinh Viên", "Họ Tên Sinh Viên", "Ngày Sinh", "Giới Tính", "Địa Chỉ", "Tên Lớp", "Email", "Số Điện Thoại"
+                "Mã Sinh Viên", "Họ Tên Sinh Viên", "Ngày Sinh", "Giới Tính", "Địa Chỉ", "Tên Lớp", "Email", "Số Điện Thoại"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setResizable(false);
-            jTable1.getColumnModel().getColumn(1).setResizable(false);
+        jScrollPane1.setViewportView(Table_Data);
+        if (Table_Data.getColumnModel().getColumnCount() > 0) {
+            Table_Data.getColumnModel().getColumn(0).setResizable(false);
         }
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(227, 227, 227)
+                .addComponent(jLabel13)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 37, Short.MAX_VALUE)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -318,7 +355,6 @@ public class V_SuaSinhVien extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jScrollPane1)
             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -327,9 +363,7 @@ public class V_SuaSinhVien extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(411, Short.MAX_VALUE)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(196, 196, 196))
+                .addGap(432, 432, 432))
             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel3Layout.createSequentialGroup()
                     .addContainerGap()
@@ -355,14 +389,80 @@ public class V_SuaSinhVien extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    // hàm xử lý Hiển thị dữ liệu lên Table
+    private DefaultTableModel table = new DefaultTableModel();   
+    public void Load_Data(){
+        // kết nối đến cơ sở dữ liệu
+        Connection conn = null;
+        Statement stm = null;
+        
+      
+        table = new DefaultTableModel();
+        // đặt tiêu đề cho các cột trong bảng
+        table.addColumn("Mã Sinh Viên");
+        table.addColumn("Họ Tên Sinh Viên");
+        table.addColumn("Ngày Sinh");
+        table.addColumn("Giới Tính");
+        table.addColumn("Địa Chỉ");
+        table.addColumn("Tên Lớp");
+        table.addColumn("Email");
+        table.addColumn("Số Điện Thoại");
+        
+        // thực hiện câu lệnh truy vấn đến bảng sinh viên
+        String SQLSelectTable = "SELECT * FROM SinhVien";
+        try {
+            conn = ConnectionDB.getConnectionDB();
+            // khởi tạo đối tượng statement
+            stm = conn.createStatement();
+            // thực hiện truy vấn để lấy ra dữ liệu
+            ResultSet kq = stm.executeQuery(SQLSelectTable);
+            while (kq.next()) {
+                // lấy dữ liệu ở các cột trong table SinhVien
+               String MaSV = kq.getString("MaSV");
+               String HoTenSV = kq.getString("HoTenSV");
+               String NgaySinh = kq.getString("NgaySinh");
+               String GioiTinh;
+               if(kq.getString("GioiTinh").equals("Nam")){
+                   GioiTinh = "Nam";
+               }
+               else {
+                   GioiTinh = "Nữ";
+               }
+               
+               String DiaChi = kq.getString("DiaChi");
+               String TenLop = kq.getString("TenLop");
+               String Email = kq.getString("Email");
+               String SoDienThoai = kq.getString("SoDienThoai");
+               
+               // khai báo và sử dụng class Vector
+                Vector row = new Vector();
+                row.addElement(MaSV);
+                row.addElement(HoTenSV);
+                row.addElement(NgaySinh);
+                row.addElement(GioiTinh);
+                row.addElement(DiaChi);
+                row.addElement(TenLop);
+                row.addElement(Email);
+                row.addElement(SoDienThoai);
+                
+                // gán giá trị của sinhvien vào các cột tương ứng
+                table.addRow(row);
+                
+            }
+            Table_Data.setModel(table); // hiển thị dữ liệu lên bảng
+        } catch (Exception e) {
+             System.out.println(e.getMessage());
+        } 
+    }
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButton1ActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void tbl_dataMouseClicked(java.awt.event.MouseEvent evt) {
+         
+    }
+    private void btn_CapNhatTTSinhVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CapNhatTTSinhVienActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btn_CapNhatTTSinhVienActionPerformed
 
     private void btThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThoatActionPerformed
         GD_TrangChu main; // khai báo biến
@@ -404,20 +504,26 @@ public class V_SuaSinhVien extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new V_SuaSinhVien().setVisible(true);
+                try {
+                    new V_SuaSinhVien().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(V_ThemSinhVien.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable Table_Data;
     private javax.swing.JButton btThoat;
+    private javax.swing.JButton btn_CapNhatTTSinhVien;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -434,7 +540,6 @@ public class V_SuaSinhVien extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
@@ -443,4 +548,9 @@ public class V_SuaSinhVien extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void actionPerformed(ActionEvent ae) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

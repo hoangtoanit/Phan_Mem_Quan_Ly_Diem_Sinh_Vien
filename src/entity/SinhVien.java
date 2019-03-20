@@ -13,6 +13,7 @@ public class SinhVien extends LopHoc {
     protected String MaSV;
     private   String HoTenSV;
     private   String NgaySinh;
+    private   String GioiTinh;
     private   String DiaChi;
     private   String Email;
     private   Integer SoDienThoai;
@@ -43,6 +44,14 @@ public class SinhVien extends LopHoc {
 
     public void setNgaySinh(String NgaySinh) {
         this.NgaySinh = NgaySinh;
+    }
+
+    public String getGioiTinh() {
+        return GioiTinh;
+    }
+
+    public void setGioiTinh(String GioiTinh) {
+        this.GioiTinh = GioiTinh;
     }
 
     public String getDiaChi() {
@@ -76,6 +85,10 @@ public class SinhVien extends LopHoc {
     public void setTenLop(String TenLop) {
         this.TenLop = TenLop;
     }
+
+    
+
+    
     
     
 }
