@@ -38,6 +38,7 @@ public class V_ThemLop extends javax.swing.JFrame implements ActionListener{
         setLocationRelativeTo(null);
         btn_ThemLopHoc.addActionListener(this);
         btn_Thoat.addActionListener(this);
+        Load_Data();
     }
 
     /**
@@ -182,6 +183,7 @@ public class V_ThemLop extends javax.swing.JFrame implements ActionListener{
         txt_khoaHoc.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
 
         btn_ThemLopHoc.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        btn_ThemLopHoc.setForeground(new java.awt.Color(255, 0, 0));
         btn_ThemLopHoc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Thêm.png"))); // NOI18N
         btn_ThemLopHoc.setText("Lưu Môn học");
         btn_ThemLopHoc.addActionListener(new java.awt.event.ActionListener() {
