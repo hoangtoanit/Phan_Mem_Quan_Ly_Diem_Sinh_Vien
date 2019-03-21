@@ -413,6 +413,7 @@ public class GD_TrangChu extends javax.swing.JFrame implements ActionListener {
         } catch (Exception ex) {
             Logger.getLogger(V_ThemSinhVien.class.getName()).log(Level.SEVERE, null, ex);
         }
+        JOptionPane.showMessageDialog(null,"Lựa Chọn Sinh Viên Cần Xóa", "Thông Báo",JOptionPane.WARNING_MESSAGE);
     }//GEN-LAST:event_Item_XoaSinhVienActionPerformed
 
     private void Item_ThemMonHocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Item_ThemMonHocActionPerformed

@@ -88,6 +88,10 @@ public class SinhVien extends LopHoc {
         this.TenLop = TenLop;
     }
 
+    public void setMaSV(int i, String toString) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     
 
     

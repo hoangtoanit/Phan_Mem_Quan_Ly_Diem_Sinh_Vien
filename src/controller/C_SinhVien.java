@@ -89,5 +89,28 @@ public class C_SinhVien {
         
     }
     
+     // xử lý chức năng Xóa Sinh Viên
+    public boolean XoaSinhVien(SinhVien SV){
+        try {
+            // kết nối cơ sở dữ liệu
+            Connection conn = null;
+            conn = ConnectionDB.getConnectionDB();
+            
+            // thực hiện câu lệnh truy vấn để cập nhật thông tin vào cơ sở dữ liệu
+            PreparedStatement statementdelete = conn.prepareStatement("DELETE FROM SinhVien Where MaSV=?");
+            // tìm thấy mã sinh viên
+            statementdelete.setString(1, SV.getMaSV());
+            statementdelete.execute();
+            return true;
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(C_SinhVien.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(C_SinhVien.class.getName()).log(Level.SEVERE, null, ex);
+            
+        }
+        return false;
+    }
+    
+    
        
 }
