@@ -16,7 +16,7 @@ public class SinhVien extends LopHoc {
     private   String GioiTinh;
     private   String DiaChi;
     private   String Email;
-    private   Integer SoDienThoai;
+    private   String SoDienThoai;
     
     public SinhVien() {
         
@@ -70,13 +70,15 @@ public class SinhVien extends LopHoc {
         this.Email = Email;
     }
 
-    public Integer getSoDienThoai() {
+    public String getSoDienThoai() {
         return SoDienThoai;
     }
 
-    public void setSoDienThoai(Integer SoDienThoai) {
+    public void setSoDienThoai(String SoDienThoai) {
         this.SoDienThoai = SoDienThoai;
     }
+
+    
 
     public String getTenLop() {
         return TenLop;

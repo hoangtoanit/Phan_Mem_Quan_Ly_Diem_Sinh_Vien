@@ -275,14 +275,30 @@ public class V_ThemSinhVien extends javax.swing.JFrame implements ActionListener
                     .addComponent(btn_LuuSinhVien)
                     .addComponent(btn_Reset, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_Thoat, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btn_LuuSinhVien, btn_Reset, txtDiaChi, txtEmail, txtHoTenSV, txtMaSV, txtNgaySinh, txtSoDienThoai, txtTenLop});
 
-        Table_Data.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        Table_Data.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         Table_Data.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null},
@@ -320,11 +336,14 @@ public class V_ThemSinhVien extends javax.swing.JFrame implements ActionListener
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(242, 242, 242)
+                .addGap(239, 239, 239)
                 .addComponent(jLabel13)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -333,9 +352,9 @@ public class V_ThemSinhVien extends javax.swing.JFrame implements ActionListener
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(205, 205, 205))
+                .addContainerGap(231, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -441,17 +460,14 @@ public class V_ThemSinhVien extends javax.swing.JFrame implements ActionListener
                 
                 // gán giá trị của sinhvien vào các cột tương ứng
                 table.addRow(row);
-                
+                // hiển thị dữ liệu lên bảng
+                Table_Data.setModel(table);
             }
-            Table_Data.setModel(table); // hiển thị dữ liệu lên bảng
+             
         } catch (Exception e) {
              System.out.println(e.getMessage());
         } 
     }
-    private void rdNamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdNamActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rdNamActionPerformed
-
     private void btn_LuuSinhVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_LuuSinhVienActionPerformed
            if(KiemTraTT() == true) {
            JOptionPane.showMessageDialog(null, "Yêu Cầu Nhập Đầy Đủ Thông Tin Của Sinh Viên","Thông Báo",JOptionPane.WARNING_MESSAGE);
@@ -477,7 +493,7 @@ public class V_ThemSinhVien extends javax.swing.JFrame implements ActionListener
                 SV.setDiaChi(txtDiaChi.getText());
                 SV.setTenLop(txtTenLop.getText());
                 SV.setEmail(txtEmail.getText());
-                SV.setSoDienThoai(Integer.parseInt(txtSoDienThoai.getText()));
+                SV.setSoDienThoai(txtSoDienThoai.getText());
 
                 SinhVien.ThemSinhVien(SV); // lấy dữ liệu gửi vào function ThemSinhVientrong Class C_SinhVien;
                 JOptionPane.showMessageDialog(this,"Thêm Sinh Viên Thành Công");
@@ -508,6 +524,10 @@ public class V_ThemSinhVien extends javax.swing.JFrame implements ActionListener
 
 
     }//GEN-LAST:event_btn_ThoatActionPerformed
+
+    private void rdNamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdNamActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rdNamActionPerformed
 
     /**
      * @param args the command line arguments

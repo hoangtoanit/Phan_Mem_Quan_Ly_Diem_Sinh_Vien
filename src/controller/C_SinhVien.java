@@ -13,6 +13,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
+
+
 /**
  *
  * @author HoangVanToan
@@ -40,7 +42,7 @@ public class C_SinhVien {
             statementadd.setString(5, SV.getDiaChi());
             statementadd.setString(6, SV.getTenLop());
             statementadd.setString(7, SV.getEmail());
-            statementadd.setInt(8,SV.getSoDienThoai());
+            statementadd.setString(8,SV.getSoDienThoai());
             // thực hiện câu lệnh truy vấn
             statementadd.execute();
             return true;
@@ -63,15 +65,16 @@ public class C_SinhVien {
             Connection conn = null;
             conn = ConnectionDB.getConnectionDB();
             // thực hiện câu lệnh truy vấn để cập nhật thông tin vào cơ sở dữ liệu
-            PreparedStatement statementupdate = conn.prepareStatement("UPDATE SinhVien SET MaSV = ?, HoTenSV = ?, NgaySinh = ?, GioiTinh = ?, DiaChi = ?, TenLop = ?, Email = ?, SoDienThoai = ?");
-            statementupdate.setString(1, SV.getMaSV());
-            statementupdate.setString(2, SV.getHoTenSV());
-            statementupdate.setString(3, SV.getNgaySinh());
-            statementupdate.setString(4, SV.getGioiTinh());
-            statementupdate.setString(5, SV.getDiaChi());
-            statementupdate.setString(6, SV.getTenLop());
-            statementupdate.setString(7, SV.getEmail());
-            statementupdate.setInt(8,SV.getSoDienThoai());
+            PreparedStatement statementupdate = conn.prepareStatement("UPDATE SinhVien SET HoTenSV = ?, NgaySinh = ?, GioiTinh = ?, DiaChi = ?, TenLop = ?, Email = ?, SoDienThoai = ? WHERE MaSV=?");
+            statementupdate.setString(1, SV.getHoTenSV());
+            statementupdate.setString(2, SV.getNgaySinh());
+            statementupdate.setString(3, SV.getGioiTinh());
+            statementupdate.setString(4, SV.getDiaChi());
+            statementupdate.setString(5, SV.getTenLop());
+            statementupdate.setString(6, SV.getEmail());
+            statementupdate.setString(7,SV.getSoDienThoai());
+            statementupdate.setString(8, SV.getMaSV());
+            
             
             // thực hiện câu lệnh truy vấn
             statementupdate.execute();

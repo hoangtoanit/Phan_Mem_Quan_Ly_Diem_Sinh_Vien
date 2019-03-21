@@ -12,33 +12,39 @@ package view;
 // import các thư viện và form hiển thị 
 import DB_Connect.ConnectionDB;
 import DB_Connect.Test_ConnectionDB;
+import static com.sun.xml.internal.fastinfoset.alphabet.BuiltInRestrictedAlphabets.table;
+import java.sql.*;
+import main.GD_TrangChu;
 import controller.C_SinhVien;
 import entity.SinhVien;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import main.GD_TrangChu;
-import javax.swing.table.DefaultTableModel;
-import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import java.awt.Component;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 public class V_SuaSinhVien extends javax.swing.JFrame implements ActionListener{
 
     /**
      * Creates new form frm_editSinhVien
      */
+    C_SinhVien SinhVien = new C_SinhVien();
     public V_SuaSinhVien() throws SQLException{
         initComponents();
         setLocationRelativeTo(null);
         setTitle("Sửa Thông Tin Sinh Viên");
-        // khai báo ThemSinhVien để sử dụng V_ThemSinhVien
+        btn_CapNhatTTSinhVien.addActionListener(this);
+        btn_Thoat.addActionListener(this);
+        rdNam.setActionCommand("Nam");
+        rdNu.setActionCommand("Nữ");
+       
        Load_Data();
-        //load dữ liệu ra table
+       
         
     }
 
@@ -62,24 +68,24 @@ public class V_SuaSinhVien extends javax.swing.JFrame implements ActionListener{
         jPanel4 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtMaSV = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txtHoTenSV = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        txtNgaySinh = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        rdNam = new javax.swing.JRadioButton();
+        rdNu = new javax.swing.JRadioButton();
         jLabel9 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        txtDiaChi = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
+        txtTenLop = new javax.swing.JTextField();
+        txtEmail = new javax.swing.JTextField();
+        txtSoDienThoai = new javax.swing.JTextField();
         btn_CapNhatTTSinhVien = new javax.swing.JButton();
-        btThoat = new javax.swing.JButton();
+        btn_Thoat = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -146,38 +152,38 @@ public class V_SuaSinhVien extends javax.swing.JFrame implements ActionListener{
         jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel5.setText("Mã Sinh Viên");
 
-        jTextField1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        txtMaSV.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
 
         jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel6.setText("Họ Tên Sinh Viên");
 
-        jTextField2.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        txtHoTenSV.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
 
         jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel7.setText("Ngày Sinh");
 
-        jTextField3.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        txtNgaySinh.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
 
         jLabel8.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel8.setText("Giới Tính");
 
-        buttonGroup1.add(jRadioButton1);
-        jRadioButton1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jRadioButton1.setText("Nam");
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+        buttonGroup1.add(rdNam);
+        rdNam.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        rdNam.setText("Nam");
+        rdNam.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
+                rdNamActionPerformed(evt);
             }
         });
 
-        buttonGroup1.add(jRadioButton2);
-        jRadioButton2.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jRadioButton2.setText("Nữ");
+        buttonGroup1.add(rdNu);
+        rdNu.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        rdNu.setText("Nữ");
 
         jLabel9.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel9.setText("Địa Chỉ");
 
-        jTextField4.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        txtDiaChi.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
 
         jLabel10.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel10.setText("Tên Lớp");
@@ -188,11 +194,11 @@ public class V_SuaSinhVien extends javax.swing.JFrame implements ActionListener{
         jLabel12.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel12.setText("Số Điện Thoại");
 
-        jTextField5.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        txtTenLop.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
 
-        jTextField6.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        txtEmail.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
 
-        jTextField7.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        txtSoDienThoai.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
 
         btn_CapNhatTTSinhVien.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         btn_CapNhatTTSinhVien.setForeground(new java.awt.Color(255, 0, 51));
@@ -204,12 +210,12 @@ public class V_SuaSinhVien extends javax.swing.JFrame implements ActionListener{
             }
         });
 
-        btThoat.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        btThoat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Thoát.png"))); // NOI18N
-        btThoat.setText("Thoát");
-        btThoat.addActionListener(new java.awt.event.ActionListener() {
+        btn_Thoat.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        btn_Thoat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Thoát.png"))); // NOI18N
+        btn_Thoat.setText("Thoát");
+        btn_Thoat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btThoatActionPerformed(evt);
+                btn_ThoatActionPerformed(evt);
             }
         });
 
@@ -231,14 +237,14 @@ public class V_SuaSinhVien extends javax.swing.JFrame implements ActionListener{
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(jRadioButton1)
+                                .addComponent(rdNam)
                                 .addGap(18, 18, 18)
-                                .addComponent(jRadioButton2))
+                                .addComponent(rdNu))
                             .addComponent(btn_CapNhatTTSinhVien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextField2)
-                            .addComponent(jTextField3)
-                            .addComponent(jTextField4)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE))
+                            .addComponent(txtHoTenSV)
+                            .addComponent(txtNgaySinh)
+                            .addComponent(txtDiaChi)
+                            .addComponent(txtMaSV, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE))
                         .addGap(85, 85, 85)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel4Layout.createSequentialGroup()
@@ -252,17 +258,17 @@ public class V_SuaSinhVien extends javax.swing.JFrame implements ActionListener{
                                         .addComponent(jLabel12)
                                         .addGap(15, 15, 15)))
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextField5, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
-                                    .addComponent(jTextField6)
-                                    .addComponent(jTextField7)))
-                            .addComponent(btThoat)))
+                                    .addComponent(txtTenLop, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
+                                    .addComponent(txtEmail)
+                                    .addComponent(txtSoDienThoai)))
+                            .addComponent(btn_Thoat)))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(238, 238, 238)
                         .addComponent(jLabel4)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel4Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jTextField1, jTextField2, jTextField3, jTextField4, jTextField5, jTextField6, jTextField7});
+        jPanel4Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {txtDiaChi, txtEmail, txtHoTenSV, txtMaSV, txtNgaySinh, txtSoDienThoai, txtTenLop});
 
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -271,41 +277,41 @@ public class V_SuaSinhVien extends javax.swing.JFrame implements ActionListener{
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtMaSV, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel5)
                         .addComponent(jLabel10)
-                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtTenLop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtHoTenSV, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel6)
                         .addComponent(jLabel11)
-                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNgaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel12)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtSoDienThoai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2))
+                    .addComponent(rdNam)
+                    .addComponent(rdNu))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtDiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_CapNhatTTSinhVien)
-                    .addComponent(btThoat))
-                .addContainerGap(37, Short.MAX_VALUE))
+                    .addComponent(btn_Thoat))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
-        jPanel4Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jTextField1, jTextField2, jTextField3, jTextField4, jTextField5, jTextField6, jTextField7});
+        jPanel4Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {txtDiaChi, txtEmail, txtHoTenSV, txtMaSV, txtNgaySinh, txtSoDienThoai, txtTenLop});
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -313,7 +319,7 @@ public class V_SuaSinhVien extends javax.swing.JFrame implements ActionListener{
         jLabel13.setForeground(new java.awt.Color(0, 0, 204));
         jLabel13.setText("BẢNG DANH SÁCH SINH VIÊN");
 
-        Table_Data.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        Table_Data.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         Table_Data.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null},
@@ -361,7 +367,7 @@ public class V_SuaSinhVien extends javax.swing.JFrame implements ActionListener{
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(411, Short.MAX_VALUE)
+                .addContainerGap(363, Short.MAX_VALUE)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(432, 432, 432))
             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -390,14 +396,15 @@ public class V_SuaSinhVien extends javax.swing.JFrame implements ActionListener{
         pack();
     }// </editor-fold>//GEN-END:initComponents
     // hàm xử lý Hiển thị dữ liệu lên Table
-    private DefaultTableModel table = new DefaultTableModel();   
+    public DefaultTableModel table = new DefaultTableModel();  
+   
     public void Load_Data(){
         // kết nối đến cơ sở dữ liệu
         Connection conn = null;
         Statement stm = null;
         
-      
         table = new DefaultTableModel();
+        
         // đặt tiêu đề cho các cột trong bảng
         table.addColumn("Mã Sinh Viên");
         table.addColumn("Họ Tên Sinh Viên");
@@ -447,29 +454,85 @@ public class V_SuaSinhVien extends javax.swing.JFrame implements ActionListener{
                 
                 // gán giá trị của sinhvien vào các cột tương ứng
                 table.addRow(row);
+                // hiển thị dữ liệu lên bảng
+                Table_Data.setModel(table);
                 
             }
-            Table_Data.setModel(table); // hiển thị dữ liệu lên bảng
+             Table_Data.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+                @Override
+                public void valueChanged(ListSelectionEvent e) {
+                    if(Table_Data.getSelectedRow() >= 0){
+                        txtMaSV.setText(Table_Data.getValueAt(Table_Data.getSelectedRow(), 0) + "");
+                        txtHoTenSV.setText(Table_Data.getValueAt(Table_Data.getSelectedRow(),1) +"");
+                        txtNgaySinh.setText(Table_Data.getValueAt(Table_Data.getSelectedRow(),2) +"");
+                        txtDiaChi.setText(Table_Data.getValueAt(Table_Data.getSelectedRow(),4) +"");
+                        txtTenLop.setText(Table_Data.getValueAt(Table_Data.getSelectedRow(),5) +"");
+                        txtEmail.setText(Table_Data.getValueAt(Table_Data.getSelectedRow(),6) +"");
+                        txtSoDienThoai.setText(Table_Data.getValueAt(Table_Data.getSelectedRow(),7) +"");
+                        
+                        if(Table_Data.getValueAt(Table_Data.getSelectedRow(),3).equals("Nam")){
+                            rdNam.setSelected(true);
+                        }
+                        else{
+                            rdNu.setSelected(true);
+                        }
+                    }
+                 
+                }
+            });
+            
         } catch (Exception e) {
              System.out.println(e.getMessage());
         } 
     }
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+    
+    
+    // xử lý sự kiện click chọn thông tin sinh viên ở bảng sinh viên
+   
+    private void rdNamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdNamActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
+    }//GEN-LAST:event_rdNamActionPerformed
     private void tbl_dataMouseClicked(java.awt.event.MouseEvent evt) {
          
     }
+     // Xử lý sự kiện click nút sửa thông tin sinh viên
     private void btn_CapNhatTTSinhVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CapNhatTTSinhVienActionPerformed
-        // TODO add your handling code here:
+        if (KiemTraTT() == true) {
+            JOptionPane.showMessageDialog(null, "Yêu Cầu Nhập Đầy Đủ Thông Tin Của Sinh Viên", "Thông Báo", JOptionPane.WARNING_MESSAGE);
+            return;
+        } else {
+            SinhVien SV = new SinhVien();
+            SV.setMaSV(txtMaSV.getText());
+            SV.setHoTenSV(txtHoTenSV.getText());
+            SV.setNgaySinh(txtNgaySinh.getText());
+
+            if (buttonGroup1.getSelection() != null) {
+                if (buttonGroup1.getSelection().getActionCommand().equals("Nam")) {
+                    SV.setGioiTinh("Nam");
+                } else {
+                    SV.setGioiTinh("Nữ");
+                }
+
+            }
+            SV.setDiaChi(txtDiaChi.getText());
+            SV.setTenLop(txtTenLop.getText());
+            SV.setEmail(txtEmail.getText());
+            SV.setSoDienThoai(txtSoDienThoai.getText());
+            // gọi hàm sửa thông tin sinh viên ở bên controller
+            SinhVien.SuaTTSinhVien(SV);
+            JOptionPane.showMessageDialog(this, "Cập Nhật Thông Tin Sinh Viên Thành Công", "Thông Báo", JOptionPane.WHEN_IN_FOCUSED_WINDOW);
+            Load_Data();
+            Reset_Form();
+
+        }
     }//GEN-LAST:event_btn_CapNhatTTSinhVienActionPerformed
 
-    private void btThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThoatActionPerformed
+    private void btn_ThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ThoatActionPerformed
         GD_TrangChu main; // khai báo biến
         main = new GD_TrangChu();
         main.setVisible(true); // hiển thị form main
         this.dispose(); // ẩn form thêm sinh viên
-    }//GEN-LAST:event_btThoatActionPerformed
+    }//GEN-LAST:event_btn_ThoatActionPerformed
 
     /**
      * @param args the command line arguments
@@ -515,8 +578,8 @@ public class V_SuaSinhVien extends javax.swing.JFrame implements ActionListener{
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable Table_Data;
-    private javax.swing.JButton btThoat;
     private javax.swing.JButton btn_CapNhatTTSinhVien;
+    private javax.swing.JButton btn_Thoat;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JLabel jLabel1;
@@ -537,20 +600,40 @@ public class V_SuaSinhVien extends javax.swing.JFrame implements ActionListener{
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
+    private javax.swing.JRadioButton rdNam;
+    private javax.swing.JRadioButton rdNu;
+    private javax.swing.JTextField txtDiaChi;
+    private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtHoTenSV;
+    private javax.swing.JTextField txtMaSV;
+    private javax.swing.JTextField txtNgaySinh;
+    private javax.swing.JTextField txtSoDienThoai;
+    private javax.swing.JTextField txtTenLop;
     // End of variables declaration//GEN-END:variables
 
     @Override
     public void actionPerformed(ActionEvent ae) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+    }
+    
+    public void Reset_Form() {
+        txtMaSV.setText("");
+        txtHoTenSV.setText("");
+        txtNgaySinh.setText("");
+        txtDiaChi.setText("");
+        txtTenLop.setText("");
+        txtEmail.setText("");
+        txtSoDienThoai.setText("");
+    }
+    
+    public boolean KiemTraTT(){
+         if (txtMaSV.getText().equals("") || txtHoTenSV.getText().equals("") || txtNgaySinh.getText().equals("")
+                 ||(!rdNam.isSelected()&& !rdNu.isSelected()) || txtDiaChi.getText().equals("") || txtTenLop.getText().equals("")
+                 || txtEmail.getText().equals("") || txtSoDienThoai.getText().equals("")){
+             
+            return true;
+         }
+           return false;    
     }
 }

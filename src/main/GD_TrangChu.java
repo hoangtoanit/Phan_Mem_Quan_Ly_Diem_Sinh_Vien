@@ -68,6 +68,7 @@ public class GD_TrangChu extends javax.swing.JFrame implements ActionListener {
         Item_ThemTaiKhoan = new javax.swing.JMenuItem();
         Item_SuaTTTaiKhoan = new javax.swing.JMenuItem();
         Item_XoaTaiKhoan = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
         Item_ThemSinhVien = new javax.swing.JMenuItem();
@@ -88,6 +89,8 @@ public class GD_TrangChu extends javax.swing.JFrame implements ActionListener {
         jMenu10 = new javax.swing.JMenu();
         menu_TKSV = new javax.swing.JMenuItem();
         menu_TKMH = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
         menu_thayDoiMK = new javax.swing.JMenu();
         menu_banquyen = new javax.swing.JMenu();
         cmd_thoat = new javax.swing.JMenu();
@@ -140,10 +143,19 @@ public class GD_TrangChu extends javax.swing.JFrame implements ActionListener {
 
         jMenu6.add(jMenu9);
 
+        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Phân Quyền.png"))); // NOI18N
+        jMenuItem2.setText("Phân Quyền Người Dùng");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jMenuItem2);
+
         jMenuBar1.add(jMenu6);
 
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Quản Lý.png"))); // NOI18N
-        jMenu1.setText("Quản Lý");
+        jMenu1.setText("Quản Lý Chức Năng");
 
         jMenu4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Sinh Viên.png"))); // NOI18N
@@ -280,7 +292,7 @@ public class GD_TrangChu extends javax.swing.JFrame implements ActionListener {
         jMenuBar1.add(jMenu1);
 
         jMenu10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Tìm Kiếm.png"))); // NOI18N
-        jMenu10.setText("Tìm Kiếm ");
+        jMenu10.setText("Tìm Kiếm Thông Tin ");
 
         menu_TKSV.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Sinh Viên.png"))); // NOI18N
         menu_TKSV.setText("Tìm Kiếm Sinh Viên");
@@ -299,6 +311,19 @@ public class GD_TrangChu extends javax.swing.JFrame implements ActionListener {
             }
         });
         jMenu10.add(menu_TKMH);
+
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Điểm.png"))); // NOI18N
+        jMenuItem1.setText("Tìm Kiếm Điểm Sinh Viên");
+        jMenu10.add(jMenuItem1);
+
+        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Lớp.png"))); // NOI18N
+        jMenuItem3.setText("Tìm Kiếm Lớp Học");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu10.add(jMenuItem3);
 
         jMenuBar1.add(jMenu10);
 
@@ -583,6 +608,14 @@ public class GD_TrangChu extends javax.swing.JFrame implements ActionListener {
         }
     }//GEN-LAST:event_Item_SuaTTTaiKhoanActionPerformed
 
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -652,8 +685,11 @@ public class GD_TrangChu extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JMenu jMenu8;
     private javax.swing.JMenu jMenu9;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem16;
     private javax.swing.JMenuItem jMenuItem18;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem menu_TKMH;
     private javax.swing.JMenuItem menu_TKSV;
     private javax.swing.JMenu menu_banquyen;
