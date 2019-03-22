@@ -449,6 +449,7 @@ public class V_ThemSinhVien extends javax.swing.JFrame implements ActionListener
                
                // khai báo và sử dụng class Vector
                 Vector row = new Vector();
+                
                 row.addElement(MaSV);
                 row.addElement(HoTenSV);
                 row.addElement(NgaySinh);

@@ -115,6 +115,9 @@
               <SubComponents>
                 <MenuItem class="javax.swing.JMenuItem" name="Item_ThemSinhVien">
                   <Properties>
+                    <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                      <KeyStroke key="F1"/>
+                    </Property>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/Images/Th&#xea;m.png"/>
                     </Property>
@@ -126,6 +129,9 @@
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="Item_SuaTTSinhVien">
                   <Properties>
+                    <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                      <KeyStroke key="F2"/>
+                    </Property>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/Images/S&#x1eed;a.png"/>
                     </Property>
@@ -137,6 +143,9 @@
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="Item_XoaSinhVien">
                   <Properties>
+                    <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                      <KeyStroke key="F3"/>
+                    </Property>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/Images/X&#xf3;a.png"/>
                     </Property>
@@ -259,6 +268,9 @@
               <SubComponents>
                 <MenuItem class="javax.swing.JMenuItem" name="Item_ThemLopHoc">
                   <Properties>
+                    <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                      <KeyStroke key="L"/>
+                    </Property>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/Images/Th&#xea;m.png"/>
                     </Property>

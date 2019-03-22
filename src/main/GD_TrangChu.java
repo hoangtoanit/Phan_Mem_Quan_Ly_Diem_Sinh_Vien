@@ -48,6 +48,8 @@ public class GD_TrangChu extends javax.swing.JFrame implements ActionListener {
         Item_ThemSinhVien.addActionListener(this);
         Item_SuaTTSinhVien.addActionListener(this);
         Item_XoaSinhVien.addActionListener(this);
+        Item_ThemMonHoc.addActionListener(this);
+        Item_ThemLopHoc.addActionListener(this);
     }
 
     /**
@@ -161,6 +163,7 @@ public class GD_TrangChu extends javax.swing.JFrame implements ActionListener {
         jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Sinh Viên.png"))); // NOI18N
         jMenu4.setText("Sinh Viên ");
 
+        Item_ThemSinhVien.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, 0));
         Item_ThemSinhVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Thêm.png"))); // NOI18N
         Item_ThemSinhVien.setText("Thêm Sinh Viên");
         Item_ThemSinhVien.addActionListener(new java.awt.event.ActionListener() {
@@ -170,6 +173,7 @@ public class GD_TrangChu extends javax.swing.JFrame implements ActionListener {
         });
         jMenu4.add(Item_ThemSinhVien);
 
+        Item_SuaTTSinhVien.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F2, 0));
         Item_SuaTTSinhVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Sửa.png"))); // NOI18N
         Item_SuaTTSinhVien.setText("Sửa Thông Tin Sinh Viên");
         Item_SuaTTSinhVien.addActionListener(new java.awt.event.ActionListener() {
@@ -179,6 +183,7 @@ public class GD_TrangChu extends javax.swing.JFrame implements ActionListener {
         });
         jMenu4.add(Item_SuaTTSinhVien);
 
+        Item_XoaSinhVien.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F3, 0));
         Item_XoaSinhVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Xóa.png"))); // NOI18N
         Item_XoaSinhVien.setText("Xóa Sinh Viên");
         Item_XoaSinhVien.addActionListener(new java.awt.event.ActionListener() {
@@ -260,6 +265,7 @@ public class GD_TrangChu extends javax.swing.JFrame implements ActionListener {
         jMenu8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Lớp.png"))); // NOI18N
         jMenu8.setText("Lớp Học");
 
+        Item_ThemLopHoc.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, 0));
         Item_ThemLopHoc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Thêm.png"))); // NOI18N
         Item_ThemLopHoc.setText("Thêm Lớp Học");
         Item_ThemLopHoc.addActionListener(new java.awt.event.ActionListener() {
@@ -583,6 +589,7 @@ public class GD_TrangChu extends javax.swing.JFrame implements ActionListener {
         } catch (Exception ex) {
             Logger.getLogger(V_ThemLop.class.getName()).log(Level.SEVERE, null, ex);
         }
+        JOptionPane.showMessageDialog(null, "Mời Bạn Thêm Lớp Học Vào Hệ Thống ","Thông Báo", JOptionPane.WARNING_MESSAGE);
     }//GEN-LAST:event_Item_ThemLopHocActionPerformed
 
     private void Item_XoaLopHocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Item_XoaLopHocActionPerformed
