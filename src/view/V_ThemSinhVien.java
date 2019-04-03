@@ -34,7 +34,7 @@ public class V_ThemSinhVien extends javax.swing.JFrame implements ActionListener
      * Creates new form frm_addSinhVien
      */
     C_SinhVien SinhVien = new C_SinhVien();
-    private SinhVien SV;
+//    private SinhVien SV;
      
     public V_ThemSinhVien() throws SQLException {
         initComponents();

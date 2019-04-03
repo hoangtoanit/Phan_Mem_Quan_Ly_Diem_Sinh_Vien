@@ -9,29 +9,29 @@ package entity;
  *
  * @author HoangVanToan
  */
-public class LopHoc extends SinhVien_MonHoc_Lop{
+public class SinhVien_MonHoc_Lop {
+    protected String MaSV;
+    protected String MaMH;
+    protected String TenLop;
     
-    private   String TenKhoa;
-    private   String KhoaHoc;
-    
-    public LopHoc() {
+    public SinhVien_MonHoc_Lop() {
         
     }
 
-    public String getTenKhoa() {
-        return TenKhoa;
+    public String getMaSV() {
+        return MaSV;
     }
 
-    public void setTenKhoa(String TenKhoa) {
-        this.TenKhoa = TenKhoa;
+    public void setMaSV(String MaSV) {
+        this.MaSV = MaSV;
     }
 
-    public String getKhoaHoc() {
-        return KhoaHoc;
+    public String getMaMH() {
+        return MaMH;
     }
 
-    public void setKhoaHoc(String KhoaHoc) {
-        this.KhoaHoc = KhoaHoc;
+    public void setMaMH(String MaMH) {
+        this.MaMH = MaMH;
     }
 
     public String getTenLop() {
@@ -43,6 +43,5 @@ public class LopHoc extends SinhVien_MonHoc_Lop{
     }
     
     
-
-  
+    
 }

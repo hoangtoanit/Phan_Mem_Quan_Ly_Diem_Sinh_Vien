@@ -9,7 +9,7 @@ package entity;
  *
  * @author HoangVanToan
  */
-public class TaiKhoan extends SinhVien{
+public class TaiKhoan{
     private String Username;
     private String Password;
     
@@ -33,13 +33,7 @@ public class TaiKhoan extends SinhVien{
         this.Password = Password;
     }
 
-    public String getMaSV() {
-        return MaSV;
-    }
-
-    public void setMaSV(String MaSV) {
-        this.MaSV = MaSV;
-    }
+ 
     
     
 }

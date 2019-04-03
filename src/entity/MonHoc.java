@@ -9,21 +9,14 @@ package entity;
  *
  * @author HoangVanToan
  */
-public class MonHoc {
-    protected String MaMH;
+public class MonHoc extends SinhVien_MonHoc_Lop{
+
     private String TenMH;
     private Integer SoTC;
+    private Integer HocKy;
     
     public MonHoc() {
         
-    }
-
-    public String getMaMH() {
-        return MaMH;
-    }
-
-    public void setMaMH(String MaMH) {
-        this.MaMH = MaMH;
     }
 
     public String getTenMH() {
@@ -41,6 +34,28 @@ public class MonHoc {
     public void setSoTC(Integer SoTC) {
         this.SoTC = SoTC;
     }
+
+    public Integer getHocKy() {
+        return HocKy;
+    }
+
+    public void setHocKy(Integer HocKy) {
+        this.HocKy = HocKy;
+    }
+    
+    
+
+    public String getMaMH() {
+        return MaMH;
+    }
+
+    public void setMaMH(String MaMH) {
+        this.MaMH = MaMH;
+    }
+    
+    
+
+   
     
         
     

@@ -185,7 +185,7 @@ public class V_ThemLop extends javax.swing.JFrame implements ActionListener{
         btn_ThemLopHoc.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         btn_ThemLopHoc.setForeground(new java.awt.Color(255, 0, 0));
         btn_ThemLopHoc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Thêm.png"))); // NOI18N
-        btn_ThemLopHoc.setText("Lưu Môn học");
+        btn_ThemLopHoc.setText("Lưu Lớp Học");
         btn_ThemLopHoc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_ThemLopHocActionPerformed(evt);

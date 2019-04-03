@@ -10,6 +10,7 @@ package main;
  * @author HoangVanToan
  */
 // import thư viện và các form cần sử dụng
+import view.V_BanQuyen;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import view.V_DangNhap;
@@ -432,6 +433,7 @@ public class GD_TrangChu extends javax.swing.JFrame implements ActionListener {
         } catch (Exception ex) {
             Logger.getLogger(V_ThemMonHoc.class.getName()).log(Level.SEVERE, null, ex);
         }
+         JOptionPane.showMessageDialog(null,"Mời Bạn Thêm Thông Tin Môn Học Vào Hệ Thống","Thông Báo",JOptionPane.WARNING_MESSAGE);
     }//GEN-LAST:event_Item_ThemMonHocActionPerformed
 
     private void Item_ThemDiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Item_ThemDiemActionPerformed
@@ -444,6 +446,7 @@ public class GD_TrangChu extends javax.swing.JFrame implements ActionListener {
         } catch (Exception ex) {
             Logger.getLogger(V_ThemDiem.class.getName()).log(Level.SEVERE, null, ex);
         }
+         JOptionPane.showMessageDialog(null,"Mời Bạn Thêm Thông Tin Điểm Vào Hệ Thống","Thông Báo",JOptionPane.WARNING_MESSAGE);
     }//GEN-LAST:event_Item_ThemDiemActionPerformed
 
     private void Item_XoaTaiKhoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Item_XoaTaiKhoanActionPerformed
@@ -478,8 +481,8 @@ public class GD_TrangChu extends javax.swing.JFrame implements ActionListener {
     }//GEN-LAST:event_cmd_thoatMouseClicked
 
     private void menu_banquyenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu_banquyenMouseClicked
-        GD_BanQuyen frmsv;
-        frmsv = new GD_BanQuyen();
+        V_BanQuyen frmsv;
+        frmsv = new V_BanQuyen();
         frmsv.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_menu_banquyenMouseClicked

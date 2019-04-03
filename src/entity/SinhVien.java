@@ -9,8 +9,8 @@ package entity;
  *
  * @author HoangVanToan
  */
-public class SinhVien extends LopHoc {
-    protected String MaSV;
+public class SinhVien extends SinhVien_MonHoc_Lop{
+  
     private   String HoTenSV;
     private   String NgaySinh;
     private   String GioiTinh;
@@ -20,14 +20,6 @@ public class SinhVien extends LopHoc {
     
     public SinhVien() {
         
-    }
-
-    public String getMaSV() {
-        return MaSV;
-    }
-
-    public void setMaSV(String MaSV) {
-        this.MaSV = MaSV;
     }
 
     public String getHoTenSV() {
@@ -78,23 +70,16 @@ public class SinhVien extends LopHoc {
         this.SoDienThoai = SoDienThoai;
     }
 
+    public String getMaSV() {
+        return MaSV;
+    }
+
+    public void setMaSV(String MaSV) {
+        this.MaSV = MaSV;
+    }
     
-
-    public String getTenLop() {
-        return TenLop;
-    }
-
-    public void setTenLop(String TenLop) {
-        this.TenLop = TenLop;
-    }
-
     public void setMaSV(int i, String toString) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-    
-
-    
-    
     
 }

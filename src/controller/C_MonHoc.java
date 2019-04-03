@@ -27,11 +27,12 @@ public class C_MonHoc {
             Connection conn = null;
             conn = ConnectionDB.getConnectionDB();
             // thực hiện câu lệnh truy vấn để thêm mới sinh viên vào cơ sở dữ liệu
-            PreparedStatement statementadd = conn.prepareStatement("INSERT INTO MonHoc(MaMH,TenMH,SoTC) VALUES (?,?,?)");
+            PreparedStatement statementadd = conn.prepareStatement("INSERT INTO MonHoc(MaMH,TenMH,SoTC,HocKy) VALUES (?,?,?,?)");
             // lấy giá trị điền vào từ form thông tin sinh viên và lưu vào cơ sở dữ liệu
             statementadd.setString(1, MH.getMaMH());
             statementadd.setString(2, MH.getTenMH());
             statementadd.setInt(3, MH.getSoTC());
+            statementadd.setInt(4, MH.getHocKy());
 
             statementadd.execute();
             return true;
