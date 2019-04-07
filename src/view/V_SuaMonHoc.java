@@ -122,7 +122,8 @@ public class V_SuaMonHoc extends javax.swing.JFrame {
         jTextField3.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
 
         jButton1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Exit.png"))); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 0, 51));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Sửa.png"))); // NOI18N
         jButton1.setText("Cập Nhật Thông Tin");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -206,13 +207,13 @@ public class V_SuaMonHoc extends javax.swing.JFrame {
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "STT", "Mã Môn Học", "Tên Môn Học", "Số Tín Chỉ"
+                "Mã Môn Học", "Tên Môn Học", "Số Tín Chỉ"
             }
         ));
         jScrollPane2.setViewportView(jTable2);

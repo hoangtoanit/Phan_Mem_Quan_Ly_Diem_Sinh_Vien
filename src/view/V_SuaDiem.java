@@ -82,13 +82,13 @@ public class V_SuaDiem extends javax.swing.JFrame {
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "STT", "Mã Sinh Viên", "Mã Môn Học", "Thành Phần 1", "Thành Phần 2", "Điểm Thi Kết Thúc", "Điểm Tổng Kết", "Xếp Loại"
+                "Mã Sinh Viên", "Mã Môn Học", "Điểm TP1", "Điểm TP2", "Điểm Thi Kết Thúc", "Điểm Tổng Kết Học Phần", "Xếp Loại"
             }
         ));
         jScrollPane2.setViewportView(jTable2);
@@ -155,10 +155,10 @@ public class V_SuaDiem extends javax.swing.JFrame {
         jLabel3.setText("Mã Sinh Viên");
 
         jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jLabel4.setText("Mã Môn Học");
+        jLabel4.setText("THI KTHP");
 
         jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jLabel5.setText("TP1");
+        jLabel5.setText("Mã Môn Học");
 
         jTextField1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
 
@@ -167,7 +167,8 @@ public class V_SuaDiem extends javax.swing.JFrame {
         jTextField3.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
 
         jButton1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Exit.png"))); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 0, 51));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Sửa.png"))); // NOI18N
         jButton1.setText("Cập Nhật Điểm Sinh Viên");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -180,13 +181,13 @@ public class V_SuaDiem extends javax.swing.JFrame {
         jLabel6.setText("SỬA ĐIỂM SINH VIÊN");
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jLabel1.setText("TP2");
+        jLabel1.setText("TKHP");
         jLabel1.setToolTipText("");
 
         jTextField4.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jLabel2.setText("DTKT");
+        jLabel2.setText("TP1");
         jLabel2.setToolTipText("");
 
         jTextField5.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
@@ -194,11 +195,11 @@ public class V_SuaDiem extends javax.swing.JFrame {
         jTextField6.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
 
         jLabel8.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jLabel8.setText("DTK");
+        jLabel8.setText("Xếp Loại");
         jLabel8.setToolTipText("");
 
         jLabel9.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jLabel9.setText("Xếp Loại");
+        jLabel9.setText("TP2");
         jLabel9.setToolTipText("");
 
         jTextField7.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
@@ -251,7 +252,7 @@ public class V_SuaDiem extends javax.swing.JFrame {
                         .addComponent(jButton1)
                         .addGap(99, 99, 99)
                         .addComponent(btThoat)))
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addContainerGap(79, Short.MAX_VALUE))
         );
 
         jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jTextField1, jTextField2, jTextField3, jTextField4, jTextField5, jTextField6, jTextField7});

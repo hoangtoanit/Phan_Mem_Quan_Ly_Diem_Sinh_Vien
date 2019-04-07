@@ -50,7 +50,24 @@ public class GD_TrangChu extends javax.swing.JFrame implements ActionListener {
         Item_SuaTTSinhVien.addActionListener(this);
         Item_XoaSinhVien.addActionListener(this);
         Item_ThemMonHoc.addActionListener(this);
+        Item_SuaTTMonHoc.addActionListener(this);
+        Item_XoaMonHoc.addActionListener(this);
+        Item_ThemDiem.addActionListener(this);
+        Item_SuaTTDiem.addActionListener(this);
+        Item_XoaDiem.addActionListener(this);
         Item_ThemLopHoc.addActionListener(this);
+        Item_SuaTTLopHoc.addActionListener(this);
+        Item_XoaLopHoc.addActionListener(this);
+        Item_ThemLopHoc.addActionListener(this);
+        Item_SuaTTLopHoc.addActionListener(this);
+        Item_XoaLopHoc.addActionListener(this);
+        Item_ThemTaiKhoan.addActionListener(this);
+        Item_SuaTTTaiKhoan.addActionListener(this);
+        Item_XoaTaiKhoan.addActionListener(this);
+       
+        
+        
+      
     }
 
     /**
@@ -380,7 +397,7 @@ public class GD_TrangChu extends javax.swing.JFrame implements ActionListener {
     }// </editor-fold>//GEN-END:initComponents
     // hiển thị form Thêm Sinh Viên
     private void Item_ThemSinhVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Item_ThemSinhVienActionPerformed
-      
+
         // khai báo biến
         V_ThemSinhVien addSinhVien;
 
@@ -391,8 +408,8 @@ public class GD_TrangChu extends javax.swing.JFrame implements ActionListener {
         } catch (Exception ex) {
             Logger.getLogger(V_ThemSinhVien.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-          JOptionPane.showMessageDialog(null,"Mời Bạn Thêm Thông Tin Sinh Viên Vào Hệ Thống","Thông Báo",JOptionPane.WARNING_MESSAGE);
+
+        JOptionPane.showMessageDialog(null, "Mời Bạn Thêm Thông Tin Sinh Viên Vào Hệ Thống", "Thông Báo", JOptionPane.WARNING_MESSAGE);
     }//GEN-LAST:event_Item_ThemSinhVienActionPerformed
     // hiển thị form Sửa thông tin sinh viên
     private void Item_SuaTTSinhVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Item_SuaTTSinhVienActionPerformed
@@ -406,7 +423,7 @@ public class GD_TrangChu extends javax.swing.JFrame implements ActionListener {
         } catch (Exception ex) {
             Logger.getLogger(V_ThemSinhVien.class.getName()).log(Level.SEVERE, null, ex);
         }
-        JOptionPane.showMessageDialog(null,"Lựa Chọn Sinh Viên Và Sửa Thông Tin Cần Thay Đổi", "Thông Báo",JOptionPane.WARNING_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Lựa Chọn Sinh Viên Và Sửa Thông Tin Cần Thay Đổi", "Thông Báo", JOptionPane.WARNING_MESSAGE);
     }//GEN-LAST:event_Item_SuaTTSinhVienActionPerformed
 
     // hiển thị form Xóa sinh viên
@@ -420,7 +437,7 @@ public class GD_TrangChu extends javax.swing.JFrame implements ActionListener {
         } catch (Exception ex) {
             Logger.getLogger(V_ThemSinhVien.class.getName()).log(Level.SEVERE, null, ex);
         }
-        JOptionPane.showMessageDialog(null,"Lựa Chọn Sinh Viên Cần Xóa", "Thông Báo",JOptionPane.WARNING_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Lựa Chọn Sinh Viên Cần Xóa", "Thông Báo", JOptionPane.WARNING_MESSAGE);
     }//GEN-LAST:event_Item_XoaSinhVienActionPerformed
 
     private void Item_ThemMonHocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Item_ThemMonHocActionPerformed
@@ -433,7 +450,7 @@ public class GD_TrangChu extends javax.swing.JFrame implements ActionListener {
         } catch (Exception ex) {
             Logger.getLogger(V_ThemMonHoc.class.getName()).log(Level.SEVERE, null, ex);
         }
-         JOptionPane.showMessageDialog(null,"Mời Bạn Thêm Thông Tin Môn Học Vào Hệ Thống","Thông Báo",JOptionPane.WARNING_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Mời Bạn Thêm Thông Tin Môn Học Vào Hệ Thống", "Thông Báo", JOptionPane.WARNING_MESSAGE);
     }//GEN-LAST:event_Item_ThemMonHocActionPerformed
 
     private void Item_ThemDiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Item_ThemDiemActionPerformed
@@ -446,7 +463,7 @@ public class GD_TrangChu extends javax.swing.JFrame implements ActionListener {
         } catch (Exception ex) {
             Logger.getLogger(V_ThemDiem.class.getName()).log(Level.SEVERE, null, ex);
         }
-         JOptionPane.showMessageDialog(null,"Mời Bạn Thêm Thông Tin Điểm Vào Hệ Thống","Thông Báo",JOptionPane.WARNING_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Mời Bạn Thêm Thông Tin Điểm Vào Hệ Thống", "Thông Báo", JOptionPane.WARNING_MESSAGE);
     }//GEN-LAST:event_Item_ThemDiemActionPerformed
 
     private void Item_XoaTaiKhoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Item_XoaTaiKhoanActionPerformed
@@ -475,9 +492,14 @@ public class GD_TrangChu extends javax.swing.JFrame implements ActionListener {
 
     private void cmd_thoatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmd_thoatMouseClicked
         V_DangNhap frm_login;
-        frm_login = new V_DangNhap();
-        frm_login.setVisible(true);
-        this.dispose();
+        try {
+            frm_login = new V_DangNhap();
+            frm_login.setVisible(true);
+            this.dispose();
+        } catch (SQLException ex) {
+            Logger.getLogger(GD_TrangChu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }//GEN-LAST:event_cmd_thoatMouseClicked
 
     private void menu_banquyenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu_banquyenMouseClicked
@@ -592,7 +614,7 @@ public class GD_TrangChu extends javax.swing.JFrame implements ActionListener {
         } catch (Exception ex) {
             Logger.getLogger(V_ThemLop.class.getName()).log(Level.SEVERE, null, ex);
         }
-        JOptionPane.showMessageDialog(null, "Mời Bạn Thêm Lớp Học Vào Hệ Thống ","Thông Báo", JOptionPane.WARNING_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Mời Bạn Thêm Lớp Học Vào Hệ Thống ", "Thông Báo", JOptionPane.WARNING_MESSAGE);
     }//GEN-LAST:event_Item_ThemLopHocActionPerformed
 
     private void Item_XoaLopHocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Item_XoaLopHocActionPerformed

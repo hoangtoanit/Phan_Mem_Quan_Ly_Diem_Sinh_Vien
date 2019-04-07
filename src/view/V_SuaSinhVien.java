@@ -33,7 +33,7 @@ public class V_SuaSinhVien extends javax.swing.JFrame implements ActionListener{
     /**
      * Creates new form frm_editSinhVien
      */
-    C_SinhVien SinhVien = new C_SinhVien();
+    C_SinhVien sv = new C_SinhVien();
     public V_SuaSinhVien() throws SQLException{
         initComponents();
         setLocationRelativeTo(null);
@@ -519,7 +519,7 @@ public class V_SuaSinhVien extends javax.swing.JFrame implements ActionListener{
             SV.setEmail(txtEmail.getText());
             SV.setSoDienThoai(txtSoDienThoai.getText());
             // gọi hàm sửa thông tin sinh viên ở bên controller
-            SinhVien.SuaTTSinhVien(SV);
+            sv.SuaTTSinhVien(SV);
             JOptionPane.showMessageDialog(this, "Cập Nhật Thông Tin Sinh Viên Thành Công", "Thông Báo", JOptionPane.WHEN_IN_FOCUSED_WINDOW);
             Load_Data();
             Reset_Form();

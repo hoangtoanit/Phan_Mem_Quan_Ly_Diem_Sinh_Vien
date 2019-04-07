@@ -11,7 +11,6 @@ package view;
  */
 // import các thư viện và form hiển thị 
 import DB_Connect.ConnectionDB;
-import DB_Connect.Test_ConnectionDB;
 import java.sql.*;
 import main.GD_TrangChu;
 import controller.C_SinhVien;
@@ -33,7 +32,7 @@ public class V_ThemSinhVien extends javax.swing.JFrame implements ActionListener
     /**
      * Creates new form frm_addSinhVien
      */
-    C_SinhVien SinhVien = new C_SinhVien();
+    C_SinhVien sv = new C_SinhVien();
 //    private SinhVien SV;
      
     public V_ThemSinhVien() throws SQLException {
@@ -496,7 +495,7 @@ public class V_ThemSinhVien extends javax.swing.JFrame implements ActionListener
                 SV.setEmail(txtEmail.getText());
                 SV.setSoDienThoai(txtSoDienThoai.getText());
 
-                SinhVien.ThemSinhVien(SV); // lấy dữ liệu gửi vào function ThemSinhVientrong Class C_SinhVien;
+                sv.ThemSinhVien(SV); // lấy dữ liệu gửi vào function ThemSinhVien trong Class C_SinhVien;
                 JOptionPane.showMessageDialog(this,"Thêm Sinh Viên Thành Công");
                 Load_Data();
                 Reset_Form();
