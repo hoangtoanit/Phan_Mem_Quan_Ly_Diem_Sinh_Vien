@@ -29,8 +29,8 @@ public class V_ThemMonHoc extends javax.swing.JFrame implements ActionListener {
     /**
      * Creates new form frm_addMonHoc
      */
-    private MonHoc MH;
-    C_MonHoc MonHoc = new C_MonHoc();
+   
+    C_MonHoc mh = new C_MonHoc();
 
     public V_ThemMonHoc() throws SQLException {
         initComponents();
@@ -387,7 +387,7 @@ public class V_ThemMonHoc extends javax.swing.JFrame implements ActionListener {
                 MH.setSoTC(Integer.parseInt(txt_SoTC.getText()));
                 MH.setHocKy(Integer.parseInt(txt_HocKy.getText()));
 
-                MonHoc.ThemMonHoc(MH);
+                mh.ThemMonHoc(MH);
                 JOptionPane.showMessageDialog(this, "Thêm Môn Học Thành Công");
                 Load_Data();
                 Reset_Form();

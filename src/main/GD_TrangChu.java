@@ -480,14 +480,17 @@ public class GD_TrangChu extends javax.swing.JFrame implements ActionListener {
 
     private void Item_ThemTaiKhoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Item_ThemTaiKhoanActionPerformed
         // TODO add your handling code here:
-        V_ThemTaiKhoan frm_addTaiKhoan;
+         V_ThemTaiKhoan addTaiKhoan;
+
         try {
-            frm_addTaiKhoan = new V_ThemTaiKhoan();
-            frm_addTaiKhoan.setVisible(true); // hiển thị form xóa sinh viên
+            addTaiKhoan = new V_ThemTaiKhoan();
+            addTaiKhoan.setVisible(true); // hiển thị form thêm sinh viên
             this.dispose(); // ẩn form main
         } catch (Exception ex) {
             Logger.getLogger(V_ThemTaiKhoan.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+        JOptionPane.showMessageDialog(null, "Mời Bạn Thêm Thông Tin Tài Khoản Vào Hệ Thống", "Thông Báo", JOptionPane.WARNING_MESSAGE);
     }//GEN-LAST:event_Item_ThemTaiKhoanActionPerformed
 
     private void cmd_thoatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmd_thoatMouseClicked

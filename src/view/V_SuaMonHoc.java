@@ -5,21 +5,35 @@
  */
 package view;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import main.GD_TrangChu;
+import java.sql.*;
+import DB_Connect.ConnectionDB;
+import entity.MonHoc;
+import controller.C_MonHoc;
+import java.util.Vector;
+import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author HoangVanToan
  */
-public class V_SuaMonHoc extends javax.swing.JFrame {
+public class V_SuaMonHoc extends javax.swing.JFrame implements ActionListener {
 
     /**
      * Creates new form frm_addMonHoc
      */
-    public V_SuaMonHoc() {
+    public V_SuaMonHoc() throws SQLException {
         initComponents();
         setTitle("Cập Nhật Môn Học");
         setLocationRelativeTo(null);
+        btn_CapNhatThongTin.addActionListener(this);
+        btn_Thoat.addActionListener(this);
+        Load_Data();
     }
 
     /**
@@ -42,15 +56,17 @@ public class V_SuaMonHoc extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        txt_MaMH = new javax.swing.JTextField();
+        txt_TenMonHoc = new javax.swing.JTextField();
+        txt_SoTC = new javax.swing.JTextField();
+        btn_CapNhatThongTin = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
-        btThoat = new javax.swing.JButton();
+        btn_Thoat = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        txt_HocKy = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        Table_Data = new javax.swing.JTable();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -115,19 +131,19 @@ public class V_SuaMonHoc extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel5.setText("Số Tín Chỉ");
 
-        jTextField1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        txt_MaMH.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
 
-        jTextField2.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        txt_TenMonHoc.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
 
-        jTextField3.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        txt_SoTC.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
 
-        jButton1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 0, 51));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Sửa.png"))); // NOI18N
-        jButton1.setText("Cập Nhật Thông Tin");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btn_CapNhatThongTin.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        btn_CapNhatThongTin.setForeground(new java.awt.Color(255, 0, 51));
+        btn_CapNhatThongTin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Sửa.png"))); // NOI18N
+        btn_CapNhatThongTin.setText("Cập Nhật Thông Tin");
+        btn_CapNhatThongTin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btn_CapNhatThongTinActionPerformed(evt);
             }
         });
 
@@ -135,14 +151,19 @@ public class V_SuaMonHoc extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(255, 204, 102));
         jLabel6.setText("SỬA THÔNG TIN MÔN HỌC");
 
-        btThoat.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        btThoat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Thoát.png"))); // NOI18N
-        btThoat.setText("Thoát");
-        btThoat.addActionListener(new java.awt.event.ActionListener() {
+        btn_Thoat.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        btn_Thoat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Thoát.png"))); // NOI18N
+        btn_Thoat.setText("Thoát");
+        btn_Thoat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btThoatActionPerformed(evt);
+                btn_ThoatActionPerformed(evt);
             }
         });
+
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jLabel1.setText("Học Kỳ");
+
+        txt_HocKy.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -154,26 +175,28 @@ public class V_SuaMonHoc extends javax.swing.JFrame {
                         .addGap(212, 212, 212)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jButton1)
+                                .addComponent(btn_CapNhatThongTin)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btThoat))
+                                .addComponent(btn_Thoat))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel3)
                                     .addComponent(jLabel4)
-                                    .addComponent(jLabel5))
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel1))
                                 .addGap(52, 52, 52)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txt_TenMonHoc)
+                                    .addComponent(txt_MaMH, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
+                                    .addComponent(txt_SoTC)
+                                    .addComponent(txt_HocKy)))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(201, 201, 201)
                         .addComponent(jLabel6)))
                 .addContainerGap(189, Short.MAX_VALUE))
         );
 
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jTextField1, jTextField2, jTextField3});
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {txt_HocKy, txt_MaMH, txt_SoTC, txt_TenMonHoc});
 
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -182,41 +205,45 @@ public class V_SuaMonHoc extends javax.swing.JFrame {
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_MaMH, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addGap(20, 20, 20)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_TenMonHoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addGap(20, 20, 20)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_SoTC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
-                .addGap(44, 44, 44)
+                .addGap(24, 24, 24)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(btThoat))
-                .addGap(39, 39, 39))
+                    .addComponent(jLabel1)
+                    .addComponent(txt_HocKy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_CapNhatThongTin)
+                    .addComponent(btn_Thoat))
+                .addContainerGap())
         );
 
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jTextField1, jTextField2, jTextField3});
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {txt_HocKy, txt_MaMH, txt_SoTC, txt_TenMonHoc});
 
         jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(0, 0, 204));
         jLabel7.setText("BẢNG DANH SÁCH MÔN HỌC");
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        Table_Data.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Mã Môn Học", "Tên Môn Học", "Số Tín Chỉ"
+                "Mã Môn Học", "Tên Môn Học", "Số Tín Chỉ", "Học Kỳ"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(Table_Data);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -259,16 +286,86 @@ public class V_SuaMonHoc extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private DefaultTableModel table = new DefaultTableModel();
 
-    private void btThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThoatActionPerformed
+    public void Load_Data() {
+        table = new DefaultTableModel();
+
+        table.addColumn("Mã Môn Học");
+        table.addColumn("Tên Môn Học");
+        table.addColumn("Số Tín Chỉ");
+        table.addColumn("Học Kỳ");
+
+        Connection conn = null;
+        Statement stm;
+
+        String SQLSelectTable = "SELECT * FROM MonHoc";
+
+        try {
+            conn = ConnectionDB.getConnectionDB();
+
+            stm = conn.createStatement();
+
+            ResultSet KQ = stm.executeQuery(SQLSelectTable);
+            while (KQ.next()) {
+                String MaMH = KQ.getString("MaMH");
+                String TenMH = KQ.getString("TenMH");
+                Integer SoTC = KQ.getInt("SoTC");
+                Integer HocKy = KQ.getInt("HocKy");
+
+                Vector row = new Vector();
+
+                row.addElement(MaMH);
+                row.addElement(TenMH);
+                row.addElement(SoTC);
+                row.addElement(HocKy);
+
+                table.addRow(row);
+                Table_Data.setModel(table);
+            }
+            Table_Data.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+                @Override
+                public void valueChanged(ListSelectionEvent lse) {
+                    if (Table_Data.getSelectedRow() >= 0) {
+                        txt_MaMH.setText(Table_Data.getValueAt(Table_Data.getSelectedRow(), 0) + "");
+                        txt_TenMonHoc.setText(Table_Data.getValueAt(Table_Data.getSelectedRow(), 1) + "");
+                        txt_SoTC.setText(Table_Data.getValueAt(Table_Data.getSelectedRow(), 2) + "");
+                        txt_HocKy.setText(Table_Data.getValueAt(Table_Data.getSelectedRow(), 3) + "");
+                    }
+                }
+
+            });
+        } catch (Exception e) {
+
+        }
+
+    }
+    private void btn_CapNhatThongTinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CapNhatThongTinActionPerformed
+        if (KiemTraTT() == true) {
+            JOptionPane.showMessageDialog(this, "Yêu Cầu Nhập Đầy Đủ Thông Tin");
+            return;
+        } else {
+            MonHoc MH = new MonHoc();
+            MH.setMaMH(txt_MaMH.getText());
+            MH.setTenMH(txt_TenMonHoc.getText());
+            MH.setSoTC(Integer.parseInt(txt_SoTC.getText()));
+            MH.setHocKy(Integer.parseInt(txt_HocKy.getText()));
+            
+            C_MonHoc mh = new C_MonHoc();
+            mh.SuaTTMonHoc(MH);
+            Load_Data();
+            Reset();
+            
+            JOptionPane.showMessageDialog(this,"Cập Nhật Thông Tin Môn Học Thành Công");
+        }
+    }//GEN-LAST:event_btn_CapNhatThongTinActionPerformed
+
+    private void btn_ThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ThoatActionPerformed
         GD_TrangChu main; // khai báo biến
         main = new GD_TrangChu();
         main.setVisible(true); // hiển thị form main
         this.dispose(); // ẩn form thêm sinh viên
-    }//GEN-LAST:event_btThoatActionPerformed
+    }//GEN-LAST:event_btn_ThoatActionPerformed
 
     /**
      * @param args the command line arguments
@@ -303,14 +400,19 @@ public class V_SuaMonHoc extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new V_SuaMonHoc().setVisible(true);
+                try {
+                    new V_SuaMonHoc().setVisible(true);
+                } catch (Exception e) {
+                }
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btThoat;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JTable Table_Data;
+    private javax.swing.JButton btn_CapNhatThongTin;
+    private javax.swing.JButton btn_Thoat;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
@@ -325,9 +427,28 @@ public class V_SuaMonHoc extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField txt_HocKy;
+    private javax.swing.JTextField txt_MaMH;
+    private javax.swing.JTextField txt_SoTC;
+    private javax.swing.JTextField txt_TenMonHoc;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void actionPerformed(ActionEvent ae) {
+
+    }
+
+    public boolean KiemTraTT() {
+        if (txt_MaMH.getText().equals("") || txt_TenMonHoc.getText().equals("") || txt_SoTC.getText().equals("")) {
+            return true;
+        }
+        return false;
+    }
+    
+    public  void Reset(){
+        txt_MaMH.setText("");
+        txt_TenMonHoc.setText("");
+        txt_SoTC.setText("");
+        txt_HocKy.setText("");
+    }
 }

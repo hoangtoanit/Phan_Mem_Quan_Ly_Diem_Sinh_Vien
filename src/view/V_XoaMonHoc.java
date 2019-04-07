@@ -5,21 +5,40 @@
  */
 package view;
 
+import DB_Connect.ConnectionDB;
+import entity.MonHoc;
+import controller.C_MonHoc;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Vector;
+import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
 import main.GD_TrangChu;
 
 /**
  *
  * @author HoangVanToan
  */
-public class V_XoaMonHoc extends javax.swing.JFrame {
+public class V_XoaMonHoc extends javax.swing.JFrame implements ActionListener {
 
     /**
      * Creates new form frm_addMonHoc
      */
-    public V_XoaMonHoc() {
+    MonHoc MH = new MonHoc();
+
+    public V_XoaMonHoc() throws SQLException {
         initComponents();
         setTitle("Xóa Môn Học");
         setLocationRelativeTo(null);
+        btn_XoaMonHoc.addActionListener(this);
+        btn_Thoat.addActionListener(this);
+        Load_Data();
     }
 
     /**
@@ -42,9 +61,9 @@ public class V_XoaMonHoc extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        btThoat = new javax.swing.JButton();
+        Table_Data = new javax.swing.JTable();
+        btn_XoaMonHoc = new javax.swing.JButton();
+        btn_Thoat = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -108,35 +127,35 @@ public class V_XoaMonHoc extends javax.swing.JFrame {
         jLabel7.setForeground(new java.awt.Color(0, 0, 204));
         jLabel7.setText("BẢNG DANH SÁCH MÔN HỌC");
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        Table_Data.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Mã Môn Học", "Tên Môn Học", "Số Tín Chỉ"
+                "Mã Môn Học", "Tên Môn Học", "Số Tín Chỉ", "Học Kỳ"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(Table_Data);
 
-        jButton1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 0, 51));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Xóa.png"))); // NOI18N
-        jButton1.setText("Xóa Môn Học");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btn_XoaMonHoc.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        btn_XoaMonHoc.setForeground(new java.awt.Color(255, 0, 51));
+        btn_XoaMonHoc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Xóa.png"))); // NOI18N
+        btn_XoaMonHoc.setText("Xóa Môn Học");
+        btn_XoaMonHoc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btn_XoaMonHocActionPerformed(evt);
             }
         });
 
-        btThoat.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        btThoat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Thoát.png"))); // NOI18N
-        btThoat.setText("Thoát");
-        btThoat.addActionListener(new java.awt.event.ActionListener() {
+        btn_Thoat.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        btn_Thoat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Thoát.png"))); // NOI18N
+        btn_Thoat.setText("Thoát");
+        btn_Thoat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btThoatActionPerformed(evt);
+                btn_ThoatActionPerformed(evt);
             }
         });
 
@@ -147,9 +166,9 @@ public class V_XoaMonHoc extends javax.swing.JFrame {
             .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(242, 242, 242)
-                .addComponent(jButton1)
+                .addComponent(btn_XoaMonHoc)
                 .addGap(87, 87, 87)
-                .addComponent(btThoat)
+                .addComponent(btn_Thoat)
                 .addContainerGap(247, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -171,8 +190,8 @@ public class V_XoaMonHoc extends javax.swing.JFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(btThoat))
+                    .addComponent(btn_XoaMonHoc)
+                    .addComponent(btn_Thoat))
                 .addContainerGap())
         );
 
@@ -207,17 +226,84 @@ public class V_XoaMonHoc extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    private DefaultTableModel table = new DefaultTableModel();
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    public void Load_Data() {
+        table = new DefaultTableModel();
 
-    private void btThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThoatActionPerformed
+        table.addColumn("Mã Môn Học");
+        table.addColumn("Tên Môn Học");
+        table.addColumn("Số Tín Chỉ");
+        table.addColumn("Học Kỳ");
+
+        Connection conn = null;
+        Statement stm;
+
+        String SQLSelectTable = "SELECT * FROM MonHoc";
+
+        try {
+            conn = ConnectionDB.getConnectionDB();
+
+            stm = conn.createStatement();
+
+            ResultSet KQ = stm.executeQuery(SQLSelectTable);
+            while (KQ.next()) {
+                String MaMH = KQ.getString("MaMH");
+                String TenMH = KQ.getString("TenMH");
+                Integer SoTC = KQ.getInt("SoTC");
+                Integer HocKy = KQ.getInt("HocKy");
+
+                Vector row = new Vector();
+
+                row.addElement(MaMH);
+                row.addElement(TenMH);
+                row.addElement(SoTC);
+                row.addElement(HocKy);
+
+                table.addRow(row);
+
+            }
+            Table_Data.setModel(table);
+
+        } catch (Exception e) {
+
+        }
+        Table_Data.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent lse) {
+                if (Table_Data.getSelectedRow() >= 0) {
+                    MH.setMaMH(Table_Data.getValueAt(Table_Data.getSelectedRow(), 0).toString());
+                }
+            }
+        }
+        );
+    }
+
+    private void btn_XoaMonHocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_XoaMonHocActionPerformed
+        MH.getMaMH();
+
+        Integer confirm = JOptionPane.showConfirmDialog(this, "Bạn Có Chắc Muốn Xóa Môn Học", "Thông Báo", JOptionPane.WARNING_MESSAGE);
+
+        if (confirm == JOptionPane.YES_OPTION) {
+            C_MonHoc mh = new C_MonHoc();
+
+            if (mh.XoaMonHoc(MH)) {
+                Load_Data();
+                JOptionPane.showMessageDialog(this, "Xóa Môn Học Thành Công");
+            } else {
+                JOptionPane.showMessageDialog(this, "Xóa Môn Học Thất Bại");
+            }
+
+        }
+
+    }//GEN-LAST:event_btn_XoaMonHocActionPerformed
+
+    private void btn_ThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ThoatActionPerformed
         GD_TrangChu main; // khai báo biến
         main = new GD_TrangChu();
         main.setVisible(true); // hiển thị form main
         this.dispose(); // ẩn form thêm sinh viên
-    }//GEN-LAST:event_btThoatActionPerformed
+    }//GEN-LAST:event_btn_ThoatActionPerformed
 
     /**
      * @param args the command line arguments
@@ -256,14 +342,18 @@ public class V_XoaMonHoc extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new V_XoaMonHoc().setVisible(true);
+                try {
+                    new V_XoaMonHoc().setVisible(true);
+                } catch (Exception e) {
+                }
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btThoat;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JTable Table_Data;
+    private javax.swing.JButton btn_Thoat;
+    private javax.swing.JButton btn_XoaMonHoc;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
@@ -275,6 +365,10 @@ public class V_XoaMonHoc extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void actionPerformed(ActionEvent ae) {
+
+    }
 }

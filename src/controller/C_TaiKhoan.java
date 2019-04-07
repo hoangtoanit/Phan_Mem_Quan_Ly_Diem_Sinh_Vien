@@ -7,7 +7,7 @@ package controller;
 
 import DB_Connect.ConnectionDB;
 import java.sql.*;
-
+import model.M_TaiKhoan;
 import entity.TaiKhoan;
 
 /**
@@ -20,6 +20,7 @@ public class C_TaiKhoan {
 
     }
 
+    // Hàm xử lý chức năng đăng nhập
     public boolean getLogin(String username, String password) {
         boolean check = false;
         try {
@@ -43,6 +44,17 @@ public class C_TaiKhoan {
         }
         return check;
 
+    }
+    M_TaiKhoan tk = new M_TaiKhoan();
+
+    //Hàm xử lý chức năng thêm tài khoản
+    public boolean ThemTaiKhoan(TaiKhoan TK) {
+
+        return tk.Create_TaiKhoan(TK);
+    }
+
+    public boolean XoaTaiKhoan(TaiKhoan TK) {
+        return tk.Delete_TaiKhoan(TK);
     }
 
 }

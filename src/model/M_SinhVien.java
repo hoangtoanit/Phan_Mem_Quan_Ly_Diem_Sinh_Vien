@@ -40,6 +40,7 @@ public class M_SinhVien {
             addSinhVien.setString(8, SV.getSoDienThoai());
 
             addSinhVien.execute();
+            addSinhVien.close();
             return true;
 
         } catch (ClassNotFoundException ex) {
@@ -71,6 +72,7 @@ public class M_SinhVien {
             updateSinhVien.setString(8, SV.getMaSV());
 
             updateSinhVien.execute();
+            updateSinhVien.close();
             return true;
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(M_SinhVien.class.getName()).log(Level.SEVERE, null, ex);
@@ -92,6 +94,7 @@ public class M_SinhVien {
             deleteSinhVien.setString(1, SV.getMaSV());
 
             deleteSinhVien.execute();
+            deleteSinhVien.close();
             return true;
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(M_SinhVien.class.getName()).log(Level.SEVERE, null, ex);
