@@ -19,6 +19,28 @@ public class M_TaiKhoan {
         
     }
     
+    public boolean getLogin(String username, String password){
+        try {
+            Connection conn = null;
+            
+            conn = ConnectionDB.getConnectionDB();
+            
+            PreparedStatement pr = conn.prepareStatement("SELECT * FROM TaiKhoan WHERE Username = ? and Password = ?");
+            pr.setString(1, username);
+            pr.setString(2, password);
+            
+            ResultSet rs = pr.executeQuery();
+             if (rs != null && rs.next()) {
+                return true;
+            }
+         
+        } catch (Exception e) {
+            
+        }
+        return false;
+       
+    }
+    
     //Hàm xử lý chức năng thêm tài khoản 
     public boolean Create_TaiKhoan(TaiKhoan TK){
         try {

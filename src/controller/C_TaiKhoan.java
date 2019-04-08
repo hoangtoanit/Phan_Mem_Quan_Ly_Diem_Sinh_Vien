@@ -21,24 +21,15 @@ public class C_TaiKhoan {
     }
 
     // Hàm xử lý chức năng đăng nhập
-    public boolean getLogin(String username, String password) {
+    public boolean KiemTraDangNhap(String username, String password) {
         boolean check = false;
         try {
-            //Kết nối đến cơ sở dữ liệu
-            Connection conn = null;
-
-            conn = ConnectionDB.getConnectionDB();
-
-            //Thực hiện câu lệnh truy vấn
-            PreparedStatement ps = conn.prepareStatement("SELECT * FROM TaiKhoan where username = ? and password = ?");
-
-            ps.setString(1, username);
-            ps.setString(2, password);
-
-            ResultSet rs = ps.executeQuery();
-            if (rs != null && rs.next()) {
-                check = true;
-            }
+                M_TaiKhoan tk = new M_TaiKhoan();
+                if(tk.getLogin(username, password)){
+                   return check = true;
+                }
+                
+            
         } catch (Exception e) {
             e.printStackTrace();
         }

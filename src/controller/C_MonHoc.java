@@ -24,7 +24,6 @@ public class C_MonHoc {
 
     //Hàm xử lý chức năng thêm môn học
     public boolean ThemMonHoc(MonHoc MH) {
-
         return mh.Create_MonHoc(MH);
     }
 
