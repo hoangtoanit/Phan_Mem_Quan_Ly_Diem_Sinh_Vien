@@ -22,7 +22,7 @@ public class ConnectionDB {
           Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
           conn = DriverManager.getConnection(ConnectionURL,username,password);
         } catch (Exception e) {
-
+            
         }
         return conn;
 

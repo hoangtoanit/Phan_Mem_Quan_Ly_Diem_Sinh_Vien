@@ -476,6 +476,7 @@ public class GD_TrangChu extends javax.swing.JFrame implements ActionListener {
         } catch (Exception ex) {
             Logger.getLogger(V_XoaTaiKhoan.class.getName()).log(Level.SEVERE, null, ex);
         }
+        JOptionPane.showMessageDialog(null, "Lựa Chọn Tài Khoản Cần Xóa", "Thông Báo", JOptionPane.WARNING_MESSAGE);
     }//GEN-LAST:event_Item_XoaTaiKhoanActionPerformed
 
     private void Item_ThemTaiKhoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Item_ThemTaiKhoanActionPerformed
@@ -642,6 +643,7 @@ public class GD_TrangChu extends javax.swing.JFrame implements ActionListener {
         } catch (Exception ex) {
             Logger.getLogger(V_SuaTaiKhoan.class.getName()).log(Level.SEVERE, null, ex);
         }
+        JOptionPane.showMessageDialog(null, "Lựa Chọn Tài Khoản Và Sửa Thông Tin Cần Thay Đổi", "Thông Báo", JOptionPane.WARNING_MESSAGE);
     }//GEN-LAST:event_Item_SuaTTTaiKhoanActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed

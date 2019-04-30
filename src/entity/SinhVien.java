@@ -18,10 +18,13 @@ public class SinhVien extends SinhVien_MonHoc_Lop{
     private   String Email;
     private   String SoDienThoai;
     
-    public SinhVien() {
-        
-    }
+   
 
+    public SinhVien() {
+       
+    }
+    
+    
     public String getHoTenSV() {
         return HoTenSV;
     }

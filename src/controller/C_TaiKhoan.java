@@ -43,6 +43,10 @@ public class C_TaiKhoan {
 
         return tk.Create_TaiKhoan(TK);
     }
+    
+    public boolean SuaTTTaiKhoan(TaiKhoan TK) {
+        return tk.Update_TaiKhoan(TK);
+    }
 
     public boolean XoaTaiKhoan(TaiKhoan TK) {
         return tk.Delete_TaiKhoan(TK);
