@@ -5,21 +5,37 @@
  */
 package view;
 
+import DB_Connect.ConnectionDB;
+import entity.TaiKhoan;
+import controller.C_TaiKhoan;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.*;
+import java.util.Vector;
+import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.plaf.basic.BasicListUI;
+import javax.swing.table.DefaultTableModel;
 import main.GD_TrangChu;
 
 /**
  *
  * @author HoangVanToan
  */
-public class V_XoaTaiKhoan extends javax.swing.JFrame {
+public class V_XoaTaiKhoan extends javax.swing.JFrame implements ActionListener {
 
     /**
      * Creates new form frm_addMonHoc
      */
-    public V_XoaTaiKhoan() {
+    TaiKhoan TK = new TaiKhoan();
+
+    public V_XoaTaiKhoan() throws SQLException {
         initComponents();
-        setTitle("Cập Nhật Tài Khoản");
+        setTitle("Xóa Tài Khoản");
         setLocationRelativeTo(null);
+        btn_XoaTaiKhoan.addActionListener(this);
+        Load_Data();
     }
 
     /**
@@ -40,11 +56,11 @@ public class V_XoaTaiKhoan extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        btn_XoaTaiKhoan = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         btThoat = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        Table_Data = new javax.swing.JTable();
         jLabel7 = new javax.swing.JLabel();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -87,37 +103,38 @@ public class V_XoaTaiKhoan extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(150, 150, 150)
+                        .addContainerGap()
                         .addComponent(jLabel17)
-                        .addGap(55, 55, 55)
+                        .addGap(119, 119, 119)
                         .addComponent(jLabel15))
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGap(208, 208, 208)
                         .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(185, Short.MAX_VALUE))
+                .addContainerGap(261, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(44, 44, 44)
-                        .addComponent(jLabel15))
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel17)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel17)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                        .addComponent(jLabel15)
+                        .addGap(34, 34, 34)))
                 .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel2.setBackground(new java.awt.Color(0, 153, 153));
 
-        jButton1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Thêm.png"))); // NOI18N
-        jButton1.setText("Xóa Tài Khoản");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btn_XoaTaiKhoan.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        btn_XoaTaiKhoan.setForeground(new java.awt.Color(255, 0, 51));
+        btn_XoaTaiKhoan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Xóa.png"))); // NOI18N
+        btn_XoaTaiKhoan.setText("Xóa Tài Khoản");
+        btn_XoaTaiKhoan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btn_XoaTaiKhoanActionPerformed(evt);
             }
         });
 
@@ -134,21 +151,21 @@ public class V_XoaTaiKhoan extends javax.swing.JFrame {
             }
         });
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        Table_Data.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "STT", "Mã Sinh Viên", "Tên Đăng Nhập", "Mật Khẩu"
+                "Tên Đăng Nhập", "Mật Khẩu"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(Table_Data);
 
         jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setForeground(new java.awt.Color(0, 0, 204));
         jLabel7.setText("BẢNG DANH SÁCH TÀI KHOẢN");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -159,32 +176,32 @@ public class V_XoaTaiKhoan extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(212, 212, 212)
-                        .addComponent(jButton1)
-                        .addGap(150, 150, 150)
+                        .addGap(204, 204, 204)
+                        .addComponent(btn_XoaTaiKhoan)
+                        .addGap(148, 148, 148)
                         .addComponent(btThoat))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(263, 263, 263)
+                        .addGap(262, 262, 262)
                         .addComponent(jLabel6))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(240, 240, 240)
+                        .addGap(236, 236, 236)
                         .addComponent(jLabel7)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel7)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(btn_XoaTaiKhoan)
                     .addComponent(btThoat))
-                .addGap(33, 33, 33))
+                .addGap(57, 57, 57))
         );
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -221,9 +238,70 @@ public class V_XoaTaiKhoan extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private DefaultTableModel table = new DefaultTableModel();
+
+    public void Load_Data() {
+        Connection conn = null;
+        Statement stm;
+
+        table = new DefaultTableModel();
+
+        table.addColumn("Tên Đăng Nhập");
+        table.addColumn("Mật Khẩu");
+
+        String SQLSelectTable = "SELECT * FROM TaiKhoan";
+        try {
+            conn = ConnectionDB.getConnectionDB();
+            stm = conn.createStatement();
+
+            ResultSet KQ = stm.executeQuery(SQLSelectTable);
+
+            while (KQ.next()) {
+                String Username = KQ.getString("Username");
+                String Password = KQ.getString("Password");
+
+                Vector row = new Vector();
+
+                row.addElement(Username);
+                row.addElement(Password);
+
+                table.addRow(row);
+
+                Table_Data.setModel(table);
+            }
+
+        } catch (Exception e) {
+
+        }
+        Table_Data.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent lse) {
+                if (Table_Data.getSelectedRow() >= 0) {
+                    TK.setUsername(Table_Data.getValueAt(Table_Data.getSelectedRow(), 0).toString());
+                }
+            }
+
+        });
+    }
+    private void btn_XoaTaiKhoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_XoaTaiKhoanActionPerformed
+        
+        TK.getUsername();
+
+        //hiển thị thông báo hỏi 
+        Integer confirm = JOptionPane.showConfirmDialog(this, "Bạn Có Chắc Chắn Muốn Xóa Sinh Viên Không?", "Thông Báo", JOptionPane.WARNING_MESSAGE);
+
+        if (confirm == JOptionPane.YES_OPTION) {
+            C_TaiKhoan tk = new C_TaiKhoan();
+            if (tk.XoaTaiKhoan(TK)) {
+                Load_Data();//load lại form
+                JOptionPane.showMessageDialog(this, "Xóa Tài Khoản Thành Công");
+            } else {
+                JOptionPane.showMessageDialog(this, "Xóa Tài Khoản Thất Bại");
+            }
+
+        }
+
+    }//GEN-LAST:event_btn_XoaTaiKhoanActionPerformed
 
     private void btThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThoatActionPerformed
         GD_TrangChu main; // khai báo biến
@@ -293,14 +371,18 @@ public class V_XoaTaiKhoan extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new V_XoaTaiKhoan().setVisible(true);
+                try {
+                    new V_XoaTaiKhoan().setVisible(true);
+                } catch (Exception e) {
+                }
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable Table_Data;
     private javax.swing.JButton btThoat;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btn_XoaTaiKhoan;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
@@ -313,6 +395,10 @@ public class V_XoaTaiKhoan extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void actionPerformed(ActionEvent ae) {
+
+    }
 }

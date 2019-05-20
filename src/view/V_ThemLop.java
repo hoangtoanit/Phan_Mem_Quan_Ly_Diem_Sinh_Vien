@@ -6,20 +6,39 @@
 package view;
 
 import main.GD_TrangChu;
+import DB_Connect.ConnectionDB;
+import DB_Connect.Test_ConnectionDB;
+import java.sql.*;
+import controller.C_LopHoc;
+import entity.LopHoc;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import java.awt.Component;
 
 /**
  *
  * @author HoangVanToan
  */
-public class V_ThemLop extends javax.swing.JFrame {
+public class V_ThemLop extends javax.swing.JFrame implements ActionListener{
 
     /**
      * Creates new form frm_addMonHoc
      */
-    public V_ThemLop() {
+   
+    C_LopHoc LopHoc = new C_LopHoc();
+    private LopHoc LH;
+    public V_ThemLop() throws SQLException{
         initComponents();
         setTitle("Quản Lý Lớp Học");
         setLocationRelativeTo(null);
+        btn_ThemLopHoc.addActionListener(this);
+        btn_Thoat.addActionListener(this);
+        Load_Data();
     }
 
     /**
@@ -36,7 +55,7 @@ public class V_ThemLop extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        Table_Data = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
@@ -46,12 +65,12 @@ public class V_ThemLop extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        txt_TenLop = new javax.swing.JTextField();
+        txt_Khoa = new javax.swing.JTextField();
+        txt_khoaHoc = new javax.swing.JTextField();
+        btn_ThemLopHoc = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
-        btThoat = new javax.swing.JButton();
+        btn_Thoat = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -75,18 +94,18 @@ public class V_ThemLop extends javax.swing.JFrame {
         jLabel7.setForeground(new java.awt.Color(0, 0, 204));
         jLabel7.setText("BẢNG DANH SÁCH LỚP HỌC");
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        Table_Data.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "STT", "Tên Lớp Học", "Khoa", "Khóa"
+                "Tên Lớp Học", "Khoa", "Khóa"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(Table_Data);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -157,18 +176,19 @@ public class V_ThemLop extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel5.setText("Khóa Học");
 
-        jTextField1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        txt_TenLop.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
 
-        jTextField2.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        txt_Khoa.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
 
-        jTextField3.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        txt_khoaHoc.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
 
-        jButton1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Thêm.png"))); // NOI18N
-        jButton1.setText("Lưu Môn học");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btn_ThemLopHoc.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        btn_ThemLopHoc.setForeground(new java.awt.Color(255, 0, 0));
+        btn_ThemLopHoc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Thêm.png"))); // NOI18N
+        btn_ThemLopHoc.setText("Lưu Lớp Học");
+        btn_ThemLopHoc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btn_ThemLopHocActionPerformed(evt);
             }
         });
 
@@ -176,12 +196,12 @@ public class V_ThemLop extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(255, 204, 102));
         jLabel6.setText("THÔNG TIN LỚP HỌC");
 
-        btThoat.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        btThoat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Thoát.png"))); // NOI18N
-        btThoat.setText("Thoát");
-        btThoat.addActionListener(new java.awt.event.ActionListener() {
+        btn_Thoat.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        btn_Thoat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Thoát.png"))); // NOI18N
+        btn_Thoat.setText("Thoát");
+        btn_Thoat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btThoatActionPerformed(evt);
+                btn_ThoatActionPerformed(evt);
             }
         });
 
@@ -195,9 +215,9 @@ public class V_ThemLop extends javax.swing.JFrame {
                     .addComponent(jLabel6)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addComponent(jButton1)
+                            .addComponent(btn_ThemLopHoc)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btThoat))
+                            .addComponent(btn_Thoat))
                         .addGroup(jPanel2Layout.createSequentialGroup()
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel3)
@@ -205,13 +225,13 @@ public class V_ThemLop extends javax.swing.JFrame {
                                 .addComponent(jLabel5))
                             .addGap(52, 52, 52)
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(txt_Khoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txt_TenLop, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txt_khoaHoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jTextField1, jTextField2, jTextField3});
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {txt_Khoa, txt_TenLop, txt_khoaHoc});
 
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -220,24 +240,24 @@ public class V_ThemLop extends javax.swing.JFrame {
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_TenLop, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addGap(20, 20, 20)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_Khoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addGap(20, 20, 20)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_khoaHoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addGap(44, 44, 44)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(btThoat))
+                    .addComponent(btn_ThemLopHoc)
+                    .addComponent(btn_Thoat))
                 .addGap(33, 33, 33))
         );
 
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jTextField1, jTextField2, jTextField3});
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {txt_Khoa, txt_TenLop, txt_khoaHoc});
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -274,16 +294,83 @@ public class V_ThemLop extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private DefaultTableModel table = new DefaultTableModel();
+    // hàm xử lý Hiển thị dữ liệu lên Table
+    public void Load_Data(){
+        // kết nối đến cơ sở dữ liệu
+        Connection conn = null;
+        Statement stm = null;
+        
+      
+        table = new DefaultTableModel();
+        // đặt tiêu đề cho các cột trong bảng
+        table.addColumn("Tên Lớp Học");
+        table.addColumn("Khoa");
+        table.addColumn("Khóa");
+        
+        // thực hiện câu lệnh truy vấn đến bảng sinh viên
+        String SQLSelectTable = "SELECT * FROM LopHoc";
+        try {
+            conn = ConnectionDB.getConnectionDB();
+            // khởi tạo đối tượng statement
+            stm = conn.createStatement();
+            // thực hiện truy vấn để lấy ra dữ liệu
+            ResultSet kq = stm.executeQuery(SQLSelectTable);
+            while (kq.next()) {
+                // lấy dữ liệu ở các cột trong table SinhVien
+               String TenLop = kq.getString("TenLop");
+               String TenKhoa = kq.getString("Khoa");
+               String KhoaHoc = kq.getString("KhoaHoc");
+              
+               
+               // khai báo và sử dụng class Vector
+                Vector row = new Vector();
+                row.addElement(TenLop);
+                row.addElement(TenKhoa);
+                row.addElement(KhoaHoc);
+             
+                
+                // gán giá trị của sinhvien vào các cột tương ứng
+                table.addRow(row);
+                // hiển thị dữ liệu lên bảng
+                Table_Data.setModel(table);
+            }
+             
+        } catch (Exception e) {
+             System.out.println(e.getMessage());
+        } 
+    }
+    private void btn_ThemLopHocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ThemLopHocActionPerformed
+        if(KiemTraTT() == true) {
+           JOptionPane.showMessageDialog(null, "Yêu Cầu Nhập Đầy Đủ Thông Tin Của Lớp","Thông Báo",JOptionPane.WARNING_MESSAGE);
+           return;
+        } else {
+            try {
+                LopHoc LH = new LopHoc();
+                // nhận giá trị các thuộc tính từ form
+                LH.setTenLop(txt_TenLop.getText());
+                LH.setTenKhoa(txt_Khoa.getText());
+                LH.setKhoaHoc(txt_khoaHoc.getText());
+                
 
-    private void btThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThoatActionPerformed
+                 LopHoc.ThemLopHoc(LH);// lấy dữ liệu gửi vào function ThemSinhVientrong Class C_SinhVien;
+                JOptionPane.showMessageDialog(this,"Thêm Sinh Viên Thành Công");
+                Load_Data();
+                Reset_Form();
+                
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }//GEN-LAST:event_btn_ThemLopHocActionPerformed
+
+    private void btn_ThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ThoatActionPerformed
         GD_TrangChu main; // khai báo biến
         main = new GD_TrangChu();
         main.setVisible(true); // hiển thị form main
         this.dispose(); // ẩn form thêm sinh viên
-    }//GEN-LAST:event_btThoatActionPerformed
+    }//GEN-LAST:event_btn_ThoatActionPerformed
 
     /**
      * @param args the command line arguments
@@ -322,14 +409,19 @@ public class V_ThemLop extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new V_ThemLop().setVisible(true);
+                try {
+                    new V_ThemLop().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(V_ThemSinhVien.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btThoat;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JTable Table_Data;
+    private javax.swing.JButton btn_ThemLopHoc;
+    private javax.swing.JButton btn_Thoat;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
@@ -345,9 +437,27 @@ public class V_ThemLop extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField txt_Khoa;
+    private javax.swing.JTextField txt_TenLop;
+    private javax.swing.JTextField txt_khoaHoc;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void actionPerformed(ActionEvent ae) {
+       
+    }
+    
+    public boolean KiemTraTT(){
+         if (txt_TenLop.getText().equals("") || txt_Khoa.getText().equals("") || txt_khoaHoc.getText().equals("")){
+            return true;
+         }
+           return false;    
+    }
+      // Hàm reset form
+    public void Reset_Form() {
+        txt_TenLop.setText("");
+        txt_Khoa.setText("");
+        txt_khoaHoc.setText("");
+      
+    }
 }

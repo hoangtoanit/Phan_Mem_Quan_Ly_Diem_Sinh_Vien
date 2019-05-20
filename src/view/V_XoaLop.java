@@ -75,9 +75,9 @@ public class V_XoaLop extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(150, 150, 150)
+                        .addContainerGap()
                         .addComponent(jLabel17)
-                        .addGap(55, 55, 55)
+                        .addGap(195, 195, 195)
                         .addComponent(jLabel15))
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGap(208, 208, 208)
@@ -105,23 +105,24 @@ public class V_XoaLop extends javax.swing.JFrame {
         jLabel6.setText("XÓA LỚP HỌC");
 
         jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setForeground(new java.awt.Color(0, 0, 204));
         jLabel7.setText("BẢNG DANH SÁCH LỚP HỌC");
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "STT", "Tên Lớp Học", "Khoa", "Khóa"
+                "Tên Lớp Học", "Khoa", "Khóa"
             }
         ));
         jScrollPane2.setViewportView(jTable2);
 
         jButton1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 0, 51));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Xóa.png"))); // NOI18N
         jButton1.setText("Xóa Lớp Học");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -147,32 +148,32 @@ public class V_XoaLop extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(242, 242, 242)
+                        .addGap(240, 240, 240)
                         .addComponent(jButton1)
                         .addGap(134, 134, 134)
                         .addComponent(btThoat))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(300, 300, 300)
+                        .addGap(301, 301, 301)
                         .addComponent(jLabel6))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(263, 263, 263)
+                        .addGap(259, 259, 259)
                         .addComponent(jLabel7)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addContainerGap()
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel7)
-                .addGap(11, 11, 11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(btThoat))
-                .addContainerGap())
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
