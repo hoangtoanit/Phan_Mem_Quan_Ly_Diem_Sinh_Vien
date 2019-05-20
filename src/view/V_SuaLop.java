@@ -5,6 +5,10 @@
  */
 package view;
 
+import java.sql.*;
+import DB_Connect.ConnectionDB;
+import java.util.Vector;
+import javax.swing.table.DefaultTableModel;
 import main.GD_TrangChu;
 
 /**
@@ -20,6 +24,7 @@ public class V_SuaLop extends javax.swing.JFrame {
         initComponents();
         setTitle("Cập Nhật Lớp Học");
         setLocationRelativeTo(null);
+        Load_Data();
     }
 
     /**
@@ -36,7 +41,7 @@ public class V_SuaLop extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        Table_Data = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
@@ -72,18 +77,18 @@ public class V_SuaLop extends javax.swing.JFrame {
         jLabel7.setForeground(new java.awt.Color(0, 0, 204));
         jLabel7.setText("BẢNG DANH SÁCH LỚP HỌC");
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        Table_Data.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "STT", "Tên Lớp Học", "Khoa", "Khóa"
+                "Tên Lớp Học", "Khoa", "Khóa Học"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(Table_Data);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -159,6 +164,7 @@ public class V_SuaLop extends javax.swing.JFrame {
         jTextField3.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
 
         jButton1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 0, 51));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Sửa.png"))); // NOI18N
         jButton1.setText("Cập Nhật Thông Tin");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -268,7 +274,48 @@ public class V_SuaLop extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+   
+    // hàm xử lý hiển thị dữ liệu lên Table
+    public DefaultTableModel table = new DefaultTableModel();
+    
+    public void Load_Data() {
+        table = new DefaultTableModel();
+        Connection conn = null;
+        Statement stm = null;
+        
+        // đặt tiêu đề cho các cột
+        table.addColumn("Tên Lớp Học");
+        table.addColumn("Khoa");
+        table.addColumn("Khóa");
+        
+        // thực hiện câu lệnh truy vấn đến table "LopHoc"
+        String SQLSelectTable = "SELECT * FROM LopHoc";
+        try {
+            conn = ConnectionDB.getConnectionDB();
+            
+            stm = conn.createStatement();
+            
+            ResultSet res = stm.executeQuery(SQLSelectTable);
+            
+            while(res.next()){
+                String TenLop = res.getString("TenLop");
+                String Khoa = res.getString("Khoa");
+                String KhoaHoc = res.getString("KhoaHoc");
+                
+                Vector row = new Vector();
+                
+                row.addElement(TenLop);
+                row.addElement(Khoa);
+                row.addElement(KhoaHoc);
+                
+                table.addRow(row);
+                Table_Data.setModel(table);
+            }
+        } catch (Exception e) {
+            
+        }
+        
+    }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -323,6 +370,7 @@ public class V_SuaLop extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable Table_Data;
     private javax.swing.JButton btThoat;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel15;
@@ -340,7 +388,6 @@ public class V_SuaLop extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;

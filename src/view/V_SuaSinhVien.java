@@ -11,7 +11,6 @@ package view;
  */
 // import các thư viện và form hiển thị 
 import DB_Connect.ConnectionDB;
-import DB_Connect.Test_ConnectionDB;
 import static com.sun.xml.internal.fastinfoset.alphabet.BuiltInRestrictedAlphabets.table;
 import java.sql.*;
 import main.GD_TrangChu;
