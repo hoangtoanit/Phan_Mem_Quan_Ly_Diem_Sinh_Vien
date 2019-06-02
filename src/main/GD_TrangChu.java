@@ -181,7 +181,7 @@ public class GD_TrangChu extends javax.swing.JFrame implements ActionListener {
         jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Sinh Viên.png"))); // NOI18N
         jMenu4.setText("Sinh Viên ");
 
-        Item_ThemSinhVien.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, 0));
+        Item_ThemSinhVien.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
         Item_ThemSinhVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Thêm.png"))); // NOI18N
         Item_ThemSinhVien.setText("Thêm Sinh Viên");
         Item_ThemSinhVien.addActionListener(new java.awt.event.ActionListener() {
@@ -191,7 +191,7 @@ public class GD_TrangChu extends javax.swing.JFrame implements ActionListener {
         });
         jMenu4.add(Item_ThemSinhVien);
 
-        Item_SuaTTSinhVien.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F2, 0));
+        Item_SuaTTSinhVien.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.ALT_MASK));
         Item_SuaTTSinhVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Sửa.png"))); // NOI18N
         Item_SuaTTSinhVien.setText("Sửa Thông Tin Sinh Viên");
         Item_SuaTTSinhVien.addActionListener(new java.awt.event.ActionListener() {
@@ -201,7 +201,7 @@ public class GD_TrangChu extends javax.swing.JFrame implements ActionListener {
         });
         jMenu4.add(Item_SuaTTSinhVien);
 
-        Item_XoaSinhVien.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F3, 0));
+        Item_XoaSinhVien.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.SHIFT_MASK));
         Item_XoaSinhVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Xóa.png"))); // NOI18N
         Item_XoaSinhVien.setText("Xóa Sinh Viên");
         Item_XoaSinhVien.addActionListener(new java.awt.event.ActionListener() {
@@ -217,6 +217,7 @@ public class GD_TrangChu extends javax.swing.JFrame implements ActionListener {
         jMenu5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Môn Học.png"))); // NOI18N
         jMenu5.setText("Môn Học");
 
+        Item_ThemMonHoc.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.CTRL_MASK));
         Item_ThemMonHoc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Thêm.png"))); // NOI18N
         Item_ThemMonHoc.setText("Thêm Môn Học");
         Item_ThemMonHoc.addActionListener(new java.awt.event.ActionListener() {
@@ -226,6 +227,7 @@ public class GD_TrangChu extends javax.swing.JFrame implements ActionListener {
         });
         jMenu5.add(Item_ThemMonHoc);
 
+        Item_SuaTTMonHoc.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.ALT_MASK));
         Item_SuaTTMonHoc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Sửa.png"))); // NOI18N
         Item_SuaTTMonHoc.setText("Sửa Thông Tin Môn Học");
         Item_SuaTTMonHoc.addActionListener(new java.awt.event.ActionListener() {
@@ -235,6 +237,7 @@ public class GD_TrangChu extends javax.swing.JFrame implements ActionListener {
         });
         jMenu5.add(Item_SuaTTMonHoc);
 
+        Item_XoaMonHoc.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.SHIFT_MASK));
         Item_XoaMonHoc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Xóa.png"))); // NOI18N
         Item_XoaMonHoc.setText("Xóa Môn Học");
         Item_XoaMonHoc.addActionListener(new java.awt.event.ActionListener() {
