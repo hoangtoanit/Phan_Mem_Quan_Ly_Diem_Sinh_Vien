@@ -219,7 +219,7 @@ public class V_XoaSinhVien extends javax.swing.JFrame implements ActionListener 
         Integer confirm = JOptionPane.showConfirmDialog(this, "Bạn Có Chắc Chắn Muốn Xóa Sinh Viên Không?","Thông Báo",JOptionPane.WARNING_MESSAGE);
 
         if (confirm == JOptionPane.YES_OPTION) {
-            if (SinhVien.XoaSinhVien(SV)) {//gửi mã sinh viên sang class deleteSinhVien trong SinhVienDAO
+            if (SinhVien.XoaSinhVien(SV)) {//gửi mã sinh viên sang class M_Diem trong model
                 Load_Data();//load lại form
                  JOptionPane.showMessageDialog(this, "Xóa Sinh Viên Thành Công");
                 

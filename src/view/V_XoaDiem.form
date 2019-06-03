@@ -185,9 +185,9 @@
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="-2" pref="176" max="-2" attributes="0"/>
-                                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="btn_XoaDiem" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="119" max="-2" attributes="0"/>
-                                      <Component id="btThoat" min="-2" max="-2" attributes="0"/>
+                                      <Component id="btn_Thoat" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace min="0" pref="223" max="32767" attributes="0"/>
@@ -214,8 +214,8 @@
                       <Component id="jScrollPane2" min="-2" pref="167" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btThoat" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btn_XoaDiem" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btn_Thoat" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -223,7 +223,7 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JButton" name="jButton1">
+            <Component class="javax.swing.JButton" name="btn_XoaDiem">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Times New Roman" size="18" style="1"/>
@@ -237,7 +237,7 @@
                 <Property name="text" type="java.lang.String" value="X&#xf3;a &#x110;i&#x1ec3;m Sinh Vi&#xea;n"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_XoaDiemActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel6">
@@ -262,7 +262,7 @@
                 <Property name="text" type="java.lang.String" value="B&#x1ea2;NG DANH S&#xc1;CH &#x110;I&#x1ec2;M SINH VI&#xca;N"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="btThoat">
+            <Component class="javax.swing.JButton" name="btn_Thoat">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Times New Roman" size="18" style="1"/>
@@ -273,7 +273,7 @@
                 <Property name="text" type="java.lang.String" value="Tho&#xe1;t"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btThoatActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_ThoatActionPerformed"/>
               </Events>
             </Component>
             <Container class="javax.swing.JScrollPane" name="jScrollPane2">
@@ -283,11 +283,10 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTable" name="jTable2">
+                <Component class="javax.swing.JTable" name="Table_Data">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="8" rowCount="4">
-                        <Column editable="true" title="STT" type="java.lang.Object"/>
+                      <Table columnCount="7" rowCount="4">
                         <Column editable="true" title="M&#xe3; Sinh Vi&#xea;n" type="java.lang.Object"/>
                         <Column editable="true" title="M&#xe3; M&#xf4;n H&#x1ecd;c" type="java.lang.Object"/>
                         <Column editable="true" title="&#x110;i&#x1ec3;m TP1" type="java.lang.Object"/>
@@ -299,11 +298,6 @@
                     </Property>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                       <TableColumnModel selectionModel="0">
-                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                          <Title/>
-                          <Editor/>
-                          <Renderer/>
-                        </Column>
                         <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                           <Title/>
                           <Editor/>

@@ -5,21 +5,39 @@
  */
 package view;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import main.GD_TrangChu;
+import java.sql.*;
+import DB_Connect.ConnectionDB;
+import entity.Diem;
+import controller.C_Diem;
+import java.util.Vector;
+import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author HoangVanToan
  */
-public class V_XoaDiem extends javax.swing.JFrame {
+public class V_XoaDiem extends javax.swing.JFrame implements ActionListener {
 
     /**
      * Creates new form frm_addMonHoc
      */
+    C_Diem diem = new C_Diem();
+
+    Diem d = new Diem();
+
     public V_XoaDiem() {
         initComponents();
         setTitle("Xóa Điểm Sinh Viên");
         setLocationRelativeTo(null);
+        btn_XoaDiem.addActionListener(this);
+        btn_Thoat.addActionListener(this);
+        Load_Data();
     }
 
     /**
@@ -40,12 +58,12 @@ public class V_XoaDiem extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        btn_XoaDiem = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        btThoat = new javax.swing.JButton();
+        btn_Thoat = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        Table_Data = new javax.swing.JTable();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -113,13 +131,13 @@ public class V_XoaDiem extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(0, 153, 153));
 
-        jButton1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 0, 51));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Xóa.png"))); // NOI18N
-        jButton1.setText("Xóa Điểm Sinh Viên");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btn_XoaDiem.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        btn_XoaDiem.setForeground(new java.awt.Color(255, 0, 51));
+        btn_XoaDiem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Xóa.png"))); // NOI18N
+        btn_XoaDiem.setText("Xóa Điểm Sinh Viên");
+        btn_XoaDiem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btn_XoaDiemActionPerformed(evt);
             }
         });
 
@@ -131,27 +149,27 @@ public class V_XoaDiem extends javax.swing.JFrame {
         jLabel7.setForeground(new java.awt.Color(0, 0, 204));
         jLabel7.setText("BẢNG DANH SÁCH ĐIỂM SINH VIÊN");
 
-        btThoat.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        btThoat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Thoát.png"))); // NOI18N
-        btThoat.setText("Thoát");
-        btThoat.addActionListener(new java.awt.event.ActionListener() {
+        btn_Thoat.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        btn_Thoat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Thoát.png"))); // NOI18N
+        btn_Thoat.setText("Thoát");
+        btn_Thoat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btThoatActionPerformed(evt);
+                btn_ThoatActionPerformed(evt);
             }
         });
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        Table_Data.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "STT", "Mã Sinh Viên", "Mã Môn Học", "Điểm TP1", "Điểm TP2", "Điểm Thi Kết Thúc Học Phần", "Điểm Tổng Kết Học Phần", "Xếp Loại"
+                "Mã Sinh Viên", "Mã Môn Học", "Điểm TP1", "Điểm TP2", "Điểm Thi Kết Thúc Học Phần", "Điểm Tổng Kết Học Phần", "Xếp Loại"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(Table_Data);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -166,9 +184,9 @@ public class V_XoaDiem extends javax.swing.JFrame {
                                 .addComponent(jLabel6))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(176, 176, 176)
-                                .addComponent(jButton1)
+                                .addComponent(btn_XoaDiem)
                                 .addGap(119, 119, 119)
-                                .addComponent(btThoat)))
+                                .addComponent(btn_Thoat)))
                         .addGap(0, 223, Short.MAX_VALUE))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 860, Short.MAX_VALUE))
                 .addContainerGap())
@@ -188,8 +206,8 @@ public class V_XoaDiem extends javax.swing.JFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(13, 13, 13)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(btThoat))
+                    .addComponent(btn_XoaDiem)
+                    .addComponent(btn_Thoat))
                 .addContainerGap())
         );
 
@@ -227,17 +245,90 @@ public class V_XoaDiem extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    private DefaultTableModel table = new DefaultTableModel();
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    public void Load_Data() {
+        table = new DefaultTableModel();
+
+        Connection conn = null;
+        Statement stm = null;
+
+        table.addColumn("Mã Sinh Viên");
+        table.addColumn("Mã Môn Học");
+        table.addColumn("Điểm TP1");
+        table.addColumn("Điểm TP2");
+        table.addColumn("Điểm Thi Kết Thúc Học Phần");
+        table.addColumn("Điểm Tổng Kết Học Phần");
+        table.addColumn("Xếp Loại");
+
+        try {
+            String SQLTableDiem = "SELECT * FROM Diem";
+            conn = ConnectionDB.getConnectionDB();
+
+            stm = conn.createStatement();
+
+            ResultSet res = stm.executeQuery(SQLTableDiem);
+
+            while (res.next()) {
+                String MaSV = res.getString("MaSV");
+                String MaMH = res.getString("MaMH");
+                String DiemTP1 = res.getString("TP1");
+                String DiemTP2 = res.getString("TP2");
+                String DiemThi = res.getString("THI");
+                String DiemTongKet = res.getString("TKHP");
+                String XepLoai = res.getString("XepLoai");
+
+                Vector row = new Vector();
+
+                row.addElement(MaSV);
+                row.addElement(MaMH);
+                row.addElement(DiemTP1);
+                row.addElement(DiemTP2);
+                row.addElement(DiemThi);
+                row.addElement(DiemTongKet);
+                row.addElement(XepLoai);
+
+                table.addRow(row);
+
+            }
+            Table_Data.setModel(table);
+        } catch (Exception e) {
+
+        }
+        Table_Data.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent lse) {
+                if (Table_Data.getSelectedRow() >= 0) {
+                    d.setMaSV(Table_Data.getValueAt(Table_Data.getSelectedRow(), 0).toString());
+                    d.setMaMH(Table_Data.getValueAt(Table_Data.getSelectedRow(), 1).toString());
+                }
+            }
+        });
+    }
+
+    private void btn_XoaDiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_XoaDiemActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        d.getMaSV();
+        d.getMaMH();
+        Integer confirm = JOptionPane.showConfirmDialog(this, "Bạn Có Chắc Chắn Muốn Xóa Điểm Của Sinh Viên Đã Chọn", "Thông Báo", JOptionPane.WARNING_MESSAGE);
 
-    private void btThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThoatActionPerformed
+        if (confirm == JOptionPane.YES_OPTION) {
+            if (diem.XoaDiem(d)) {
+                Load_Data();
+                JOptionPane.showMessageDialog(this, "Xóa Điểm Của Sinh Viên Thành Công");
+            } else {
+                JOptionPane.showMessageDialog(this, "Xóa Điểm Của Sinh Viên Thất Bại");//thông báo khi xóa dữ liệu thất bại
+            }
+
+        }
+    }//GEN-LAST:event_btn_XoaDiemActionPerformed
+
+    private void btn_ThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ThoatActionPerformed
         GD_TrangChu main; // khai báo biến
         main = new GD_TrangChu();
         main.setVisible(true); // hiển thị form main
         this.dispose(); // ẩn form thêm sinh viên
-    }//GEN-LAST:event_btThoatActionPerformed
+    }//GEN-LAST:event_btn_ThoatActionPerformed
 
     /**
      * @param args the command line arguments
@@ -306,8 +397,9 @@ public class V_XoaDiem extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btThoat;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JTable Table_Data;
+    private javax.swing.JButton btn_Thoat;
+    private javax.swing.JButton btn_XoaDiem;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
@@ -320,6 +412,10 @@ public class V_XoaDiem extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void actionPerformed(ActionEvent ae) {
+
+    }
 }

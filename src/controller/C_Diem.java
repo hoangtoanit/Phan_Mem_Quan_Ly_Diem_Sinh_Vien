@@ -30,4 +30,8 @@ public class C_Diem {
     public boolean SuaDiem(Diem D){
         return diem.Update_Diem(D);
     }
+    
+    public boolean XoaDiem(Diem D){
+        return diem.Delete_Diem(D);
+    }
 }
