@@ -36,6 +36,7 @@ public class M_Diem {
             statement.setString(7, D.getXepLoai());
             //thực hiện câu lệnh truy vấn
             statement.execute();
+            statement.close();
             return true;
         } catch (Exception e) {
             
@@ -59,7 +60,26 @@ public class M_Diem {
             statement.setString(7, D.getMaMH());
             
             statement.execute();
+            statement.close();
             
+        } catch (Exception e) {
+        }
+        return false;
+    }
+    
+    public boolean Delete_Diem(Diem D) {
+        try {
+            Connection conn = null;
+            conn = ConnectionDB.getConnectionDB();
+            
+            PreparedStatement statement = conn.prepareStatement("DELETE FROM Diem WHERE MaSV = ? and MaMH = ?");
+            statement.setString(1, D.getMaSV());
+            statement.setString(2, D.getMaMH());
+            
+            statement.execute();
+            
+            statement.close();
+            return true;
         } catch (Exception e) {
         }
         return false;
